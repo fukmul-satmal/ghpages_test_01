@@ -3,15 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>GitHub Pages (Master Repository)</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
 <main>
   <h1>GitHub Pages のサンプル (Master Repository)</h1>
+  <a href="https://fukmul-satmal.github.io/">__戻る__</a>
+  <p id="current_url"></p>
 </main>
 
 <script>
 console.log('GitHub Pages Master Repository');
+
+jQuery( function() {
+    jQuery( '#current_url' ).text( location.href );
+} );
+
 </script>
 </body>
 </html>
