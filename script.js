@@ -92,13 +92,26 @@ const logout = () => {
 const renewSession = () => {
     console.log("renewSession do.");
     webAuth0.checkSession({}, (err, authResult) => {
-       if (authResult && authResult.accessToken && authResult.idToken) {
-         setSession(authResult);
-       } else if (err) {
-         console.log(err);
-         alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
-       }
-      updateUI();
+      if (authResult && authResult.accessToken && authResult.idToken) {
+        webAuth0.client.userInfo(authResult.accessToken, (err, user) => {
+          if (err) {
+            console.log(err);
+            alert(`Error: ${err.error}. Check the console for further details.`);
+          }
+          else if (user) {
+            console.log("userinfo get.")
+            setSession(authResult);
+          }
+          updateUI();
+        });
+      }
+      else {
+        if (err) {
+          console.log(err);
+          alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
+        }
+        updateUI();
+      }
     });
  };
 
@@ -108,19 +121,31 @@ const  handleAuthentication = () => {
     webAuth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         console.log("do set session");
-        setSession(authResult);
-      }
-      else if (err) {
-        console.log(err);
-        alert(`Error: ${err.error}. Check the console for further details.`);
+        webAuth0.client.userInfo(authResult.accessToken, (err, user) => {
+          if (err) {
+            console.log(err);
+            alert(`Error: ${err.error}. Check the console for further details.`);
+          }
+          else if (user) {
+            console.log("userinfo get.")
+            setSession(authResult, user);
+          }
+          updateUI();
+        });
       }
       else {
-        console.log(JSON.stringify(
-          authResult
-        ));
-        console.log("try login.");
+        if (err) {
+          console.log(err);
+          alert(`Error: ${err.error}. Check the console for further details.`);
+        }
+        else {
+          console.log(JSON.stringify(
+            authResult
+          ));
+          console.log("try login.");
+        }
+        updateUI();
       }
-      updateUI();
     });
 };
 
@@ -129,17 +154,30 @@ const  handleRedirect = () => {
     console.log("handleRedirect do.");
     webAuth0.parseHash({hash: window.location.hash}, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        setSession(authResult);
-      } else if (err) {
-        console.log(err);
-        alert(`Error: ${err.error}. Check the console for further details.`);
-        logout();
+        webAuth0.client.userInfo(authResult.accessToken, (err, user) => {
+          if (err) {
+            console.log(err);
+            alert(`Error: ${err.error}. Check the console for further details.`);
+          }
+          else if (user) {
+            console.log("userinfo get.")
+            setSession(authResult, user);
+          }
+          updateUI();
+        });
       }
-      updateUI();
+      else {
+        if (err) {
+          console.log(err);
+          alert(`Error: ${err.error}. Check the console for further details.`);
+          logout();
+        }
+        updateUI();
+      }
     });
 };
 
-const  setSession = (authResult) => {
+const  setSession = (authResult, user) => {
     // Set isLoggedIn flag in localStorage
 //    localStorage.setItem('isLoggedIn', 'true');
 
@@ -147,17 +185,8 @@ const  setSession = (authResult) => {
     // Set the time that the access token will expire at
     accessToken = authResult.accessToken;
     idToken = authResult.idToken;
+    userInfo = user;
     expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();;
-    webAuth0.client.userInfo(authResult.accessToken, (err, user) => {
-      if (err) {
-        console.log(err);
-        alert(`Error: ${err.error}. Check the console for further details.`);
-      }
-      else if (user) {
-        console.log("userinfo get.")
-        userInfo = user;
-      }
-    });
 };
 
 const  getAccessToken = () => {
