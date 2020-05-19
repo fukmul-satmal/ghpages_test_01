@@ -65,7 +65,7 @@ const login = async () => {
 
   webAuth0.authorize({
     redirectUri: window.location.origin + APP_PATH,
-    responseType: 'token id_token',
+    responseType: 'token id_token code',
     scope: 'openid'
   });
 };
