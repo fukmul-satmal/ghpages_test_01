@@ -22,6 +22,7 @@ const configureClient = async () => {
 const isAuthenticated = () => {
     // Check whether the current time is past the
     // access token's expiry time
+    console.log("isAuthenticated do,");
     return new Date().getTime() < expiresAt;
 };
 
@@ -94,7 +95,7 @@ const renewSession = () => {
     console.log("renewSession do.");
     webAuth0.checkSession({}, (err, authResult) => {
        if (authResult && authResult.accessToken && authResult.idToken) {
-         this.setSession(authResult);
+         setSession(authResult);
        } else if (err) {
          console.log(err);
          alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
@@ -173,12 +174,9 @@ const getUser = () => {
 const updateUI = async () => { 
   console.log("updateUI do.");
 
-  await handleAuthentication();
+  handleAuthentication();
   let authFlg = isAuthenticated();
 
-  document.getElementById("btn-logout").disabled = !authFlg;
-  document.getElementById("btn-login").disabled = !authFlg;
-  
   // NEW - add logic to show/hide gated content after authentication
   if (authFlg) {
     console.log("is Auth 2.");
