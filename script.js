@@ -24,7 +24,7 @@ window.onload = async () => {
 
   updateUI();
 
-  const isAuthenticated = isAuthenticated();
+  let isAuthenticated = isAuthenticated();
 
   if (isAuthenticated) {
     // show the gated content
@@ -155,7 +155,7 @@ const getUser = () => {
 const updateUI = async () => { 
 
   handleAuthentication();
-  const isAuthenticated = isAuthenticated();
+  let isAuthenticated = isAuthenticated();
 
   document.getElementById("btn-logout").disabled = !isAuthenticated;
   document.getElementById("btn-login").disabled = isAuthenticated;
