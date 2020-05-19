@@ -11,7 +11,7 @@ const fetchAuthConfig = () => fetch("auth_config.json"); // auth_config.jsonèª­ã
 
 const configureClient = () => {
   const response = fetchAuthConfig();
-  const config = await response.json();
+  const config = response.json();
 
   webAuth0 = new auth0.WebAuth({
     domain: config.domain,
