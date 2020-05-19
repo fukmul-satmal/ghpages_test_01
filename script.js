@@ -30,9 +30,9 @@ window.onload = async () => {
 
   updateUI();
 
-  let isAuthenticated = isAuthenticated();
+  let authFlg = isAuthenticated();
 
-  if (isAuthenticated) {
+  if (authFlg) {
     // show the gated content
     return;
   }
@@ -155,13 +155,13 @@ const getUser = () => {
 const updateUI = async () => { 
 
   handleAuthentication();
-  let isAuthenticated = isAuthenticated();
+  let authFlg = isAuthenticated();
 
-  document.getElementById("btn-logout").disabled = !isAuthenticated;
-  document.getElementById("btn-login").disabled = isAuthenticated;
+  document.getElementById("btn-logout").disabled = !authFlg;
+  document.getElementById("btn-login").disabled = authFlg;
   
   // NEW - add logic to show/hide gated content after authentication
-  if (isAuthenticated) {
+  if (authFlg) {
     document.getElementById("gated-content").classList.remove("hidden");
 
     document.getElementById(
