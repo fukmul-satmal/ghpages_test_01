@@ -19,6 +19,12 @@ const configureClient = async () => {
   });
 };
 
+const isAuthenticated = () => {
+    // Check whether the current time is past the
+    // access token's expiry time
+    return new Date().getTime() < expiresAt;
+};
+
 window.onload = async () => {
   await configureClient();
 
@@ -79,12 +85,6 @@ const logout = () => {
   webAuth0.logout({
     returnTo: window.location.origin + APP_PATH
   });
-};
-
-const isAuthenticated = () => {
-    // Check whether the current time is past the
-    // access token's expiry time
-    return new Date().getTime() < expiresAt;
 };
 
 //getTokenSilently
