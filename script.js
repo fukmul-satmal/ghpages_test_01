@@ -29,7 +29,7 @@ const isAuthenticated = () => {
 window.onload = async () => {
   await configureClient();
 
-  await updateUI();
+  await handleAuthentication();
 
   let authFlg = isAuthenticated();
 
@@ -45,8 +45,6 @@ window.onload = async () => {
 
     // Process the login state
     await handleRedirect();
-    
-    await updateUI();
 
     // Use replaceState to redirect the user away and remove the querystring parameters
     console.log("history replacestate.");
@@ -91,22 +89,23 @@ const logout = () => {
 };
 
 //getTokenSilently
-const renewSession = async () => {
+const renewSession = () => {
     console.log("renewSession do.");
-    await webAuth0.checkSession({}, (err, authResult) => {
+    webAuth0.checkSession({}, (err, authResult) => {
        if (authResult && authResult.accessToken && authResult.idToken) {
          setSession(authResult);
        } else if (err) {
          console.log(err);
          alert(`Could not get a new token (${err.error}: ${err.error_description}).`);
        }
+      updateUI();
     });
  };
 
 //
-const  handleAuthentication = async () => {
+const  handleAuthentication = () => {
     console.log("handleAuthentication do.");
-    await webAuth0.parseHash((err, authResult) => {
+    webAuth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         console.log("do set session");
         setSession(authResult);
@@ -121,13 +120,14 @@ const  handleAuthentication = async () => {
         ));
         console.log("try login.");
       }
+      updateUI();
     });
 };
 
 //handleRedirectCallback
-const  handleRedirect = async () => {
+const  handleRedirect = () => {
     console.log("handleRedirect do.");
-    await webAuth0.parseHash({hash: window.location.hash}, (err, authResult) => {
+    webAuth0.parseHash({hash: window.location.hash}, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         setSession(authResult);
       } else if (err) {
@@ -135,6 +135,7 @@ const  handleRedirect = async () => {
         alert(`Error: ${err.error}. Check the console for further details.`);
         logout();
       }
+      updateUI();
     });
 };
 
@@ -171,10 +172,9 @@ const getUser = () => {
     return userInfo;
 };
 
-const updateUI = async () => { 
+const updateUI = () => { 
   console.log("updateUI do.");
 
-  await handleAuthentication();
   let authFlg = isAuthenticated();
 
   // NEW - add logic to show/hide gated content after authentication
