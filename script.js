@@ -93,7 +93,7 @@ const logout = () => {
 //getTokenSilently
 const renewSession = () => {
     console.log("renewSession do.");
-    webAuth0.checkSession({}, (err, authResult) => {
+    await webAuth0.checkSession({}, (err, authResult) => {
        if (authResult && authResult.accessToken && authResult.idToken) {
          setSession(authResult);
        } else if (err) {
@@ -106,7 +106,7 @@ const renewSession = () => {
 //
 const  handleAuthentication = () => {
     console.log("handleAuthentication do.");
-    webAuth0.parseHash((err, authResult) => {
+    await webAuth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         console.log("do set session");
         setSession(authResult);
@@ -127,7 +127,7 @@ const  handleAuthentication = () => {
 //handleRedirectCallback
 const  handleRedirect = () => {
     console.log("handleRedirect do.");
-    webAuth0.parseHash({hash: window.location.hash}, (err, authResult) => {
+    await webAuth0.parseHash({hash: window.location.hash}, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         setSession(authResult);
       } else if (err) {
