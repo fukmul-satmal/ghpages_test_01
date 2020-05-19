@@ -112,6 +112,14 @@ const  handleAuthentication = () => {
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
       else {
+        console.log(JSON.stringify(
+          authResult
+        ));
+        console.log(authResult.accessToken
+        ));
+        console.log(JSON.stringify(
+          authResult.idToken
+        ));
         console.log("try login.");
       }
     });
