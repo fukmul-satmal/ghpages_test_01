@@ -9,9 +9,9 @@ let expiresAt = 0;
 
 const fetchAuthConfig = () => fetch("auth_config.json"); // auth_config.json読み込み
 
-const configureClient = () => {
-  const response = fetchAuthConfig();
-  const config = response.json();
+const configureClient = async () => {
+  const response = await fetchAuthConfig();
+  const config = await response.json();
 
   webAuth0 = new auth0.WebAuth({
     domain: config.domain,
@@ -25,10 +25,10 @@ const isAuthenticated = () => {
     return new Date().getTime() < expiresAt;
 };
 
-window.onload = () => {
-  configureClient();
+window.onload = async () => {
+  await configureClient();
 
-  updateUI();
+  await updateUI();
 
   let authFlg = isAuthenticated();
 
@@ -45,7 +45,7 @@ window.onload = () => {
     // Process the login state
     handleRedirect();
     
-    updateUI();
+    await updateUI();
 
     // Use replaceState to redirect the user away and remove the querystring parameters
     console.log("history replacestate.");
@@ -170,7 +170,7 @@ const getUser = () => {
     return userInfo;
 };
 
-const updateUI = () => { 
+const updateUI = async () => { 
   console.log("updateUI do.");
 
   handleAuthentication();
