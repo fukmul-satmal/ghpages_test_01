@@ -177,8 +177,7 @@ const updateUI = async () => {
   let authFlg = isAuthenticated();
 
   document.getElementById("btn-logout").disabled = !authFlg;
-//  document.getElementById("btn-login").disabled = authFlg;
-  document.getElementById("btn-login").disabled = false;
+  document.getElementById("btn-login").disabled = !authFlg;
   
   // NEW - add logic to show/hide gated content after authentication
   if (authFlg) {
