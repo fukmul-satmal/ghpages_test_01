@@ -115,8 +115,7 @@ const  handleAuthentication = () => {
         console.log(JSON.stringify(
           authResult
         ));
-        console.log(authResult.accessToken
-        ));
+        console.log(authResult.accessToken);
         console.log(JSON.stringify(
           authResult.idToken
         ));
