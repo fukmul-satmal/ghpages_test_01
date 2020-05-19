@@ -1,7 +1,5 @@
 'use strict';
 
-import auth0 from 'auth0-js';
-
 const APP_PATH = '/'; // https://ユーザー名.github.io/<ココ> or ルートパス利用なら`/`だけでOK
 let webAuth0 = null;
 let accessToken = null;
