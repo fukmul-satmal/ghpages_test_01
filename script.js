@@ -1,6 +1,6 @@
 'use strict';
 
-const APP_PATH = '/'; // https://ユーザー名.github.io/<ココ> or ルートパス利用なら`/`だけでOK
+const APP_PATH = '/ghpages_test_01'; // https://ユーザー名.github.io/<ココ> or ルートパス利用なら`/`だけでOK
 let webAuth0 = null;
 let accessToken = null;
 let idToken = null;
