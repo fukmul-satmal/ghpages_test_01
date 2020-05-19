@@ -33,6 +33,7 @@ window.onload = async () => {
   let authFlg = isAuthenticated();
 
   if (authFlg) {
+    console.log("is Auth.")
     // show the gated content
     return;
   }
@@ -103,7 +104,11 @@ const renewSession = () => {
 const  handleAuthentication = () => {
     webAuth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        console.log("do set session");
         setSession(authResult);
+      }
+      else {
+        console.log("try login.");
       }
     });
 };
@@ -135,6 +140,7 @@ const  setSession = (authResult) => {
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
       else if (user) {
+        console.log("userinfo get.")
         userInfo = user;
       }
     });
@@ -162,6 +168,7 @@ const updateUI = async () => {
   
   // NEW - add logic to show/hide gated content after authentication
   if (authFlg) {
+    console.log("is Auth 2.");
     document.getElementById("gated-content").classList.remove("hidden");
 
     document.getElementById(
@@ -177,6 +184,7 @@ const updateUI = async () => {
     document.getElementById("ipt-user-profile-image").src = profile.picture;
 
   } else {
+    console.log("is not Auth.");
     document.getElementById("gated-content").classList.add("hidden");
   }
 };
