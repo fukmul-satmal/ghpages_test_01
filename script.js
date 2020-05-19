@@ -9,7 +9,7 @@ let expiresAt = 0;
 
 const fetchAuthConfig = () => fetch("auth_config.json"); // auth_config.json読み込み
 
-const configureClient = async () => {
+const configureClient = () => {
   const response = await fetchAuthConfig();
   const config = await response.json();
 
@@ -25,7 +25,7 @@ const isAuthenticated = () => {
     return new Date().getTime() < expiresAt;
 };
 
-window.onload = async () => {
+window.onload = () => {
   await configureClient();
 
   updateUI();
@@ -165,7 +165,7 @@ const getUser = () => {
     return userInfo;
 };
 
-const updateUI = async () => { 
+const updateUI = () => { 
 
   handleAuthentication();
   let authFlg = isAuthenticated();
