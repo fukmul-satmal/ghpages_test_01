@@ -10,7 +10,7 @@ let expiresAt = 0;
 const fetchAuthConfig = () => fetch("auth_config.json"); // auth_config.json読み込み
 
 const configureClient = () => {
-  const response = await fetchAuthConfig();
+  const response = fetchAuthConfig();
   const config = await response.json();
 
   webAuth0 = new auth0.WebAuth({
@@ -26,7 +26,7 @@ const isAuthenticated = () => {
 };
 
 window.onload = () => {
-  await configureClient();
+  configureClient();
 
   updateUI();
 
@@ -48,6 +48,7 @@ window.onload = () => {
     updateUI();
 
     // Use replaceState to redirect the user away and remove the querystring parameters
+    console.log("history replacestate.");
     window.history.replaceState({}, document.title, APP_PATH);
   }
 };
@@ -90,6 +91,7 @@ const logout = () => {
 
 //getTokenSilently
 const renewSession = () => {
+    console.log("renewSession do.");
     webAuth0.checkSession({}, (err, authResult) => {
        if (authResult && authResult.accessToken && authResult.idToken) {
          this.setSession(authResult);
@@ -102,6 +104,7 @@ const renewSession = () => {
 
 //
 const  handleAuthentication = () => {
+    console.log("handleAuthentication do.");
     webAuth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         console.log("do set session");
@@ -122,6 +125,7 @@ const  handleAuthentication = () => {
 
 //handleRedirectCallback
 const  handleRedirect = () => {
+    console.log("handleRedirect do.");
     webAuth0.parseHash({hash: window.location.hash}, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         setSession(authResult);
@@ -137,6 +141,7 @@ const  setSession = (authResult) => {
     // Set isLoggedIn flag in localStorage
 //    localStorage.setItem('isLoggedIn', 'true');
 
+    console.log("setSession do.");
     // Set the time that the access token will expire at
     accessToken = authResult.accessToken;
     idToken = authResult.idToken;
@@ -166,6 +171,7 @@ const getUser = () => {
 };
 
 const updateUI = () => { 
+  console.log("updateUI do.");
 
   handleAuthentication();
   let authFlg = isAuthenticated();
