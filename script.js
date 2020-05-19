@@ -45,35 +45,6 @@ window.onload = async () => {
   }
 };
 
-const updateUI = async () => { 
-
-  handleAuthentication();
-  const isAuthenticated = isAuthenticated();
-
-  document.getElementById("btn-logout").disabled = !isAuthenticated;
-  document.getElementById("btn-login").disabled = isAuthenticated;
-  
-  // NEW - add logic to show/hide gated content after authentication
-  if (isAuthenticated) {
-    document.getElementById("gated-content").classList.remove("hidden");
-
-    document.getElementById(
-      "ipt-access-token"
-    ).innerHTML = getAccessToken();
-
-    document.getElementById("ipt-user-profile").innerHTML = JSON.stringify(
-      getIdToken()
-    );
-
-    //プロフ画像
-    const profile = getUser();
-    document.getElementById("ipt-user-profile-image").src = profile.picture;
-
-  } else {
-    document.getElementById("gated-content").classList.add("hidden");
-  }
-};
-
 const login = async () => {
   let user = document.getElementById("user").value;
   let pass = document.getElementById("pass").value;
@@ -179,5 +150,34 @@ const  getIdToken = () => {
 
 const getUser = () => {
     return userInfo;
+};
+
+const updateUI = async () => { 
+
+  handleAuthentication();
+  const isAuthenticated = isAuthenticated();
+
+  document.getElementById("btn-logout").disabled = !isAuthenticated;
+  document.getElementById("btn-login").disabled = isAuthenticated;
+  
+  // NEW - add logic to show/hide gated content after authentication
+  if (isAuthenticated) {
+    document.getElementById("gated-content").classList.remove("hidden");
+
+    document.getElementById(
+      "ipt-access-token"
+    ).innerHTML = getAccessToken();
+
+    document.getElementById("ipt-user-profile").innerHTML = JSON.stringify(
+      getIdToken()
+    );
+
+    //プロフ画像
+    const profile = getUser();
+    document.getElementById("ipt-user-profile-image").src = profile.picture;
+
+  } else {
+    document.getElementById("gated-content").classList.add("hidden");
+  }
 };
 
