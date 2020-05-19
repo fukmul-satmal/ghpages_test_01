@@ -1,6 +1,6 @@
 'use strict';
 
-const APP_PATH = '/ghpages_test_01'; // https://ユーザー名.github.io/<ココ> or ルートパス利用なら`/`だけでOK
+const APP_PATH = '/'; // https://ユーザー名.github.io/<ココ> or ルートパス利用なら`/`だけでOK
 let webAuth0 = null;
 let accessToken = null;
 let idToken = null;
@@ -106,6 +106,10 @@ const  handleAuthentication = () => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         console.log("do set session");
         setSession(authResult);
+      }
+      else if (err) {
+        console.log(err);
+        alert(`Error: ${err.error}. Check the console for further details.`);
       }
       else {
         console.log("try login.");
