@@ -174,7 +174,7 @@ const getUser = () => {
 const updateUI = async () => { 
   console.log("updateUI do.");
 
-  handleAuthentication();
+  await handleAuthentication();
   let authFlg = isAuthenticated();
 
   // NEW - add logic to show/hide gated content after authentication
