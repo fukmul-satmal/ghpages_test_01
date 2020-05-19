@@ -216,7 +216,7 @@ const updateUI = () => {
     ).innerHTML = getAccessToken();
 
     document.getElementById("ipt-user-profile").innerHTML = JSON.stringify(
-      getIdToken()
+      getUser()
     );
 
     //プロフ画像
