@@ -44,7 +44,7 @@ window.onload = async () => {
   if (query.includes("code=") && query.includes("state=")) {
 
     // Process the login state
-    handleRedirect();
+    await handleRedirect();
     
     await updateUI();
 
@@ -91,7 +91,7 @@ const logout = () => {
 };
 
 //getTokenSilently
-const renewSession = () => {
+const renewSession = async () => {
     console.log("renewSession do.");
     await webAuth0.checkSession({}, (err, authResult) => {
        if (authResult && authResult.accessToken && authResult.idToken) {
@@ -104,7 +104,7 @@ const renewSession = () => {
  };
 
 //
-const  handleAuthentication = () => {
+const  handleAuthentication = async () => {
     console.log("handleAuthentication do.");
     await webAuth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
@@ -125,7 +125,7 @@ const  handleAuthentication = () => {
 };
 
 //handleRedirectCallback
-const  handleRedirect = () => {
+const  handleRedirect = async () => {
     console.log("handleRedirect do.");
     await webAuth0.parseHash({hash: window.location.hash}, (err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
