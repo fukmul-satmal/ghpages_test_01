@@ -28,6 +28,12 @@ const isAuthenticated = () => {
 
 window.onload = async () => {
 
+  let verifier = window.sessionStorage.getItem("verifier");
+  if (!verifier) {
+    verifier = base64URLEncode(crypto.randomBytes(32));
+    window.sessionStorage.setItem("verifier", verifier);
+  }
+  document.getElementById("verifire").value = verifier;
 
   await configureClient();
 
