@@ -1,6 +1,5 @@
 'use strict';
 
-const crypto = require('crypto');
 const APP_PATH = '/ghpages_test_01'; // https://ユーザー名.github.io/<ココ> or ルートパス利用なら`/`だけでOK
 
 let webAuth0 = null;
@@ -32,7 +31,11 @@ window.onload = async () => {
 
   let verifier = window.sessionStorage.getItem("verifier");
   if (!verifier) {
-    verifier = base64URLEncode(crypto.randomBytes(32));
+    let array = new Unit32Array(8);
+    window.crypto.getRandomValues(array);
+    let baseStr = array.join('');
+    console.log(baseStr);
+    verifier = base64URLEncode(baseStr);
     window.sessionStorage.setItem("verifier", verifier);
   }
   document.getElementById("verifire").value = verifier;
@@ -110,7 +113,7 @@ const base64URLEncode = (str) => {
 
 
 const sha256 = (buffer) => {
-    return crypto.createHash('sha256').update(buffer).digest();
+    return window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(buffer));
 }
 
 
