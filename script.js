@@ -27,13 +27,27 @@ const isAuthenticated = () => {
     return new Date().getTime() < expiresAt;
 };
 
+const getRndStr = () => {
+  //使用文字の定義
+  var str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&=~/*-+";
+ 
+  //桁数の定義
+  var len = 32;
+ 
+  //ランダムな文字列の生成
+  var result = "";
+  for(var i=0;i<len;i++){
+    result += str.charAt(Math.floor(Math.random() * str.length));
+  }
+  return result;
+}
+
+
 window.onload = async () => {
 
   let verifier = window.sessionStorage.getItem("verifier");
   if (!verifier) {
-    let array = new Unit32Array(8);
-    window.crypto.getRandomValues(array);
-    let baseStr = array.join('');
+    let baseStr = getRndStr();
     console.log(baseStr);
     verifier = base64URLEncode(baseStr);
     window.sessionStorage.setItem("verifier", verifier);
