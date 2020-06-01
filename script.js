@@ -29,7 +29,7 @@ const isAuthenticated = () => {
 
 const getRndStr = () => {
   //使用文字の定義
-  var str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&=~/*-+";
+  var str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-+";
  
   //桁数の定義
   var len = 32;
