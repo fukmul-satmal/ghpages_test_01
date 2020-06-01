@@ -100,7 +100,7 @@ const login = async () => {
     return;
   }
   else {
-    challenge = base64URLEncode(sha256(verifier));
+    challenge = base64URLEncode(sha256(verifire));
   }
 
 //  if (!code) {
