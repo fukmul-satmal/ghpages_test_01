@@ -27,6 +27,14 @@ const isAuthenticated = () => {
 };
 
 window.onload = async () => {
+
+  let verifier = sessionStrage.getItem("verifier");
+  if (!verifier) {
+    verifier = base64URLEncode(crypto.randomBytes(32));
+    sessionStrage.setItem("verifier", verifier);
+  }
+  document.getElementById("verifire").value = verifier;
+
   await configureClient();
 
   await handleAuthentication();
@@ -57,18 +65,52 @@ const login = async () => {
   let pass = document.getElementById("pass").value;
   let realm = document.getElementById("realm").value;
   let nonce = document.getElementById("nonce").value;
+  let code = document.getElementById("code").value;
+  let verifire = document.getElementById("verifire").value;
 
   console.log("user is ; " + user);
   console.log("pass is ; " + pass);
   console.log("realm is ; " + realm);
   console.log("nonce is ; " + nonce);
+  console.log("code is ; " + code);
+  console.log("verifire is ; " + verifire);
 
-  webAuth0.authorize({
-    redirectUri: window.location.origin + APP_PATH,
-    responseType: 'token id_token code',
-    scope: 'openid'
-  });
+  let challenge = "";
+  if(!verifire) {
+    alert("verifire is empty.");
+    return;
+  }
+  else {
+    challenge = base64URLEncode(sha256(verifier));
+  }
+
+//  if (!code) {
+    webAuth0.authorize({
+      redirectUri: window.location.origin + APP_PATH,
+      responseType: 'token id_token code',
+      scope: 'openid',
+      code_challenge: challenge,
+      code_challenge_method: 'S256'
+    });
+//  }
+//  else {
+//  }
+
 };
+
+
+const base64URLEncode = (str) => {
+    return str.toString('base64')
+        .replace(/\+/g, '-')
+        .replace(/\//g, '_')
+        .replace(/=/g, '');
+}
+
+
+const sha256 = (buffer) => {
+    return crypto.createHash('sha256').update(buffer).digest();
+}
+
 
 const logout = () => {
     // Remove tokens and expiry time
