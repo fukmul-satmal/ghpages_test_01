@@ -119,7 +119,7 @@ const login = async () => {
   else {
     document.codepost.code.value = code;
     document.codepost.code_verifire.value = verifire;
-    document.codepost.crient_id.value = config.clientId;
+    document.codepost.client_id.value = config.clientId;
 
     let sendForm = new FormData(document.getElementById('codepost_id'));
     fetch("https://fukmul-satmal.auth0.com/oauth/token", {
