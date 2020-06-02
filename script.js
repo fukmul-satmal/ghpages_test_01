@@ -33,7 +33,7 @@ const getRndStr = () => {
   var str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-+";
  
   //桁数の定義
-  var len = 32;
+  var len = 48;
  
   //ランダムな文字列の生成
   var result = "";
