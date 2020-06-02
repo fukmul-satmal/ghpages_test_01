@@ -120,17 +120,20 @@ const login = async () => {
     document.codepost.code.value = code;
     document.codepost.code_verifier.value = verifier;
     document.codepost.client_id.value = config.clientId;
+    document.codepost.redirect_uri.value = window.location.origin + APP_PATH;
 
     console.log("hidden code is " + document.codepost.code.value);
     console.log("hidden code_verifier is " + document.codepost.code_verifier.value);
     console.log("hidden client_id is " + document.codepost.client_id.value);
     console.log("hidden grant_type is " + document.codepost.grant_type.value);
+    console.log("hidden redirect_uri is " + document.codepost.redirect_uri.value);
 
     let bodydata = {};
     bodydata["code"] = document.codepost.code.value;
     bodydata["code_verifier"] = document.codepost.code_verifier.value;
     bodydata["grant_type"] = document.codepost.grant_type.value;
     bodydata["client_id"] = document.codepost.client_id.value;
+    bodydata["redirect_uri"] = document.codepost.redirect_uri.value;
 
     let sendForm = new FormData(document.getElementById('codepost_id'));
 
