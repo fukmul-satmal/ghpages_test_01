@@ -100,7 +100,7 @@ const login = async () => {
     return;
   }
   else {
-    challenge = base64URLEncode(sha256(verifire));
+    challenge = base64URLEncode(await sha256(verifire));
   }
 
 //  if (!code) {
@@ -129,8 +129,8 @@ const base64URLEncode = (str) => {
 }
 
 
-const sha256 = (buffer) => {
-    let hashbuffer = window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(buffer));
+const sha256 = async (buffer) => {
+    let hashbuffer = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(buffer));
     let hasharray = Array.from(new Uint8Array(hashbuffer));
     let hashHex = hasharray.map(b => b.toString(16).padStart(2, '0')).join('');
     console.log("hashHex is " + hashHex);
