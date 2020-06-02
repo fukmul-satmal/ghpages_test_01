@@ -124,7 +124,7 @@ const login = async () => {
     console.log("hidden code is " + document.codepost.code.value);
     console.log("hidden code_verifire is " + document.codepost.code_verifire.value);
     console.log("hidden client_id is " + document.codepost.client_id.value);
-    console.log("hidden grant_type is document.codepost.grant_type.value" + );
+    console.log("hidden grant_type is " + document.codepost.grant_type.value);
 
     let sendForm = new FormData(document.getElementById('codepost_id'));
     fetch("https://fukmul-satmal.auth0.com/oauth/token", {
