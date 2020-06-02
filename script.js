@@ -53,7 +53,7 @@ window.onload = async () => {
     verifier = base64URLEncode(baseStr);
     window.sessionStorage.setItem("verifier", verifier);
   }
-  document.getElementById("verifire").value = verifier;
+  document.getElementById("verifier").value = verifier;
 
   await configureClient();
 
@@ -86,22 +86,22 @@ const login = async () => {
   let realm = document.getElementById("realm").value;
   let nonce = document.getElementById("nonce").value;
   let code = document.getElementById("code").value;
-  let verifire = document.getElementById("verifire").value;
+  let verifier = document.getElementById("verifier").value;
 
   console.log("user is ; " + user);
   console.log("pass is ; " + pass);
   console.log("realm is ; " + realm);
   console.log("nonce is ; " + nonce);
   console.log("code is ; " + code);
-  console.log("verifire is ; " + verifire);
+  console.log("verifier is ; " + verifier);
 
   let challenge = "";
-  if(!verifire) {
-    alert("verifire is empty.");
+  if(!verifier) {
+    alert("verifier is empty.");
     return;
   }
   else {
-    challenge = base64URLEncode(await sha256(verifire));
+    challenge = base64URLEncode(await sha256(verifier));
   }
 
   if (!code) {
@@ -118,11 +118,11 @@ const login = async () => {
   }
   else {
     document.codepost.code.value = code;
-    document.codepost.code_verifire.value = verifire;
+    document.codepost.code_verifier.value = verifier;
     document.codepost.client_id.value = config.clientId;
 
     console.log("hidden code is " + document.codepost.code.value);
-    console.log("hidden code_verifire is " + document.codepost.code_verifire.value);
+    console.log("hidden code_verifier is " + document.codepost.code_verifier.value);
     console.log("hidden client_id is " + document.codepost.client_id.value);
     console.log("hidden grant_type is " + document.codepost.grant_type.value);
 
