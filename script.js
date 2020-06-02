@@ -106,13 +106,13 @@ const login = async () => {
 //  if (!code) {
     console.log("challenge is " + challenge);
     console.log(challenge.length);
-//    webAuth0.authorize({
-//      redirectUri: window.location.origin + APP_PATH,
-//      responseType: 'token id_token code',
-//      scope: 'openid',
-//      code_challenge: challenge,
-//      code_challenge_method: 'S256'
-//    });
+    webAuth0.authorize({
+      redirectUri: window.location.origin + APP_PATH,
+      responseType: 'token id_token code',
+      scope: 'openid',
+      code_challenge: challenge,
+      code_challenge_method: 'S256'
+    });
 
 //  }
 //  else {
