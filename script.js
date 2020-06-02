@@ -133,7 +133,7 @@ const sha256 = (buffer) => {
     let hashbuffer = window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(buffer));
     let hasharray = Array.from(new Uint8Array(hashbuffer));
     let hashHex = hasharray.map(b => b.toString(16).padStart(2, '0')).join('');
-    console.log("hashHex is " + HashHex);
+    console.log("hashHex is " + hashHex);
     return hashHex;
 }
 
