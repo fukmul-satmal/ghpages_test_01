@@ -104,6 +104,8 @@ const login = async () => {
   }
 
 //  if (!code) {
+    console.log(challenge);
+    console.log(challenge.length);
     webAuth0.authorize({
       redirectUri: window.location.origin + APP_PATH,
       responseType: 'token id_token code',
