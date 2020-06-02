@@ -128,7 +128,7 @@ const login = async () => {
 
     let bodydata = {};
     bodydata["code"] = document.codepost.code.value;
-    bodydata["code_verifier"] = document.codepost.code_verofier.value;
+    bodydata["code_verifier"] = document.codepost.code_verifier.value;
     bodydata["grant_type"] = document.codepost.grant_type.value;
     bodydata["client_id"] = document.codepost.client_id.value;
 
