@@ -7,12 +7,13 @@ let accessToken = null;
 let idToken = null;
 let userInfo = null;
 let expiresAt = 0;
+let config = null;
 
 const fetchAuthConfig = () => fetch("auth_config.json"); // auth_config.json読み込み
 
 const configureClient = async () => {
   const response = await fetchAuthConfig();
-  const config = await response.json();
+  config = await response.json();
 
   webAuth0 = new auth0.WebAuth({
     domain: config.domain,
@@ -103,7 +104,7 @@ const login = async () => {
     challenge = base64URLEncode(await sha256(verifire));
   }
 
-//  if (!code) {
+  if (!code) {
     console.log("challenge is " + challenge);
     console.log(challenge.length);
     webAuth0.authorize({
@@ -114,9 +115,32 @@ const login = async () => {
       code_challenge_method: 'S256'
     });
 
-//  }
-//  else {
-//  }
+  }
+  else {
+    document.codepost.code.value = code;
+    document.codepost.code_verifire.value = verifire;
+    document.codepost.crient_id.value = config.clientId;
+
+    let sendForm = new FormData(document.getElementById('codepost_id'));
+    fetch("https://fukmul-satmal.auth0.com/oauth/token", {
+        method: "POST",
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: sendForm
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((resJson) => {
+        console.log(JSON.stringify(resJson));
+    })
+    .catch((error) => {
+        console.log("Error!");
+        console.error(error);
+    });
+  }
 
 };
 
