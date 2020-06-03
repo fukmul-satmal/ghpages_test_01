@@ -170,7 +170,7 @@ const base64URLEncode = (str) => {
 
 const sha256 = async (buffer) => {
     let hashbuffer = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(buffer));
-    console.log("hashbuffer is " + hashbuffer);
+    console.log("hashbuffer is " + hashbuffer.toString());
     let hasharray = Array.from(new Uint8Array(hashbuffer));
     let hashHex = hasharray.map(b => b.toString(16).padStart(2, '0')).join('');
     console.log("hashHex is " + hashHex);
