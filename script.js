@@ -107,13 +107,13 @@ const login = async () => {
   if (!code) {
     console.log("challenge is " + challenge);
     console.log(challenge.length);
-    webAuth0.authorize({
-      redirectUri: window.location.origin + APP_PATH,
-      responseType: 'token id_token code',
-      scope: 'openid',
-      code_challenge: challenge,
-      code_challenge_method: 'S256'
-    });
+//    webAuth0.authorize({
+//      redirectUri: window.location.origin + APP_PATH,
+//      responseType: 'token id_token code',
+//      scope: 'openid',
+//      code_challenge: challenge,
+//      code_challenge_method: 'S256'
+//    });
 
   }
   else {
@@ -170,6 +170,7 @@ const base64URLEncode = (str) => {
 
 const sha256 = async (buffer) => {
     let hashbuffer = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(buffer));
+    console.log("hashbuffer is " + hashbuffer);
     let hasharray = Array.from(new Uint8Array(hashbuffer));
     let hashHex = hasharray.map(b => b.toString(16).padStart(2, '0')).join('');
     console.log("hashHex is " + hashHex);
