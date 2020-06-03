@@ -29220,7 +29220,7 @@ const getRndStr = () => {
     result += str.charAt(Math.floor(Math.random() * str.length));
   }
   return result;
-}
+};
 
 
 window.onload = async () => {
@@ -29344,7 +29344,7 @@ const base64URLEncode = (str) => {
         .replace(/\+/g, '-')
         .replace(/\//g, '_')
         .replace(/=/g, '');
-}
+};
 
 
 const sha256 = async (buffer) => {
@@ -29354,7 +29354,7 @@ const sha256 = async (buffer) => {
 //    console.log("hashHex is " + hashHex);
 //    return hashHex;
     return crypto.createHash('sha256').update(buffer).digest();
-}
+};
 
 
 const logout = () => {
@@ -29400,7 +29400,7 @@ const renewSession = () => {
         updateUI();
       }
     });
- };
+};
 
 //
 const  handleAuthentication = () => {
