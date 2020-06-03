@@ -29259,7 +29259,7 @@ window.onload = async () => {
   }
 };
 
-const login = async function(){
+const login = async () => {
   let user = document.getElementById("user").value;
   let pass = document.getElementById("pass").value;
   let realm = document.getElementById("realm").value;
@@ -29357,7 +29357,7 @@ const sha256 = async (buffer) => {
 };
 
 
-const logout = function() {
+const logout = () => {
     // Remove tokens and expiry time
     accessToken = null;
     idToken = null;
