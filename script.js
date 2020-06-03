@@ -29516,5 +29516,9 @@ const updateUI = () => {
   }
 };
 
+module.exports.login = login;
+module.exports.logout = logout;
+
+
 
 },{"crypto":73}]},{},[]);
