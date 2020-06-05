@@ -29281,6 +29281,7 @@ const login = async () => {
   }
   else {
     challenge = base64URLEncode(await sha256(verifier));
+    console.log("base64URLEncode_challenge is " + challenge);
   }
 
   if (!code) {
@@ -29359,9 +29360,8 @@ const sha256 = async (buffer) => {
 //    console.log("hashHex is " + hashHex);
 //    return hashHex;
 
-    console.log('hex charenge is ' + crypto.createHash('sha256').update(buffer).digest("hex"));
+    console.log('hex challenge is ' + crypto.createHash('sha256').update(buffer).digest("hex"));
     let ret = crypto.createHash('sha256').update(buffer).digest();
-    console.log('charenge is ' + ret);
     return ret;
 };
 
