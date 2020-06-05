@@ -29289,7 +29289,7 @@ const login = async () => {
     webAuth0.authorize({
       redirectUri: window.location.origin + APP_PATH,
       responseType: 'token id_token code',
-      scope: 'openid',
+      scope: 'openid profile',
       code_challenge: challenge,
       code_challenge_method: 'S256'
     });
