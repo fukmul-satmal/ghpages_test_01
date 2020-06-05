@@ -29259,7 +29259,7 @@ window.onload = async () => {
   }
 };
 
-const login = async function(){
+const login = async () => {
   let user = document.getElementById("user").value;
   let pass = document.getElementById("pass").value;
   let realm = document.getElementById("realm").value;
@@ -29329,6 +29329,10 @@ const login = async function(){
     })
     .then((resJson) => {
         console.log(JSON.stringify(resJson));
+        let base64url = resJson.split('.')[1];
+        let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        let decodeJson = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+        console.log(decodeJson);
     })
     .catch((error) => {
         console.log("Error!");
@@ -29357,7 +29361,7 @@ const sha256 = async (buffer) => {
 };
 
 
-const logout = function() {
+const logout = () => {
     // Remove tokens and expiry time
     accessToken = null;
     idToken = null;
