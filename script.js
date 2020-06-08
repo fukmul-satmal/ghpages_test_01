@@ -29227,14 +29227,21 @@ window.onload = async () => {
 
   let qry = {};
   let qrystr = window.location.search.slice(1);
-  if (!(!qrystr)) {
+  if (!qrystr) {
+    console.log("qry is emp.");
+  }
+  else {
     qrystr.split('&').forEach(function(qrystr){
       let qryarry = qrystr.split('=');
         qry[qryarry[0]] = qryarry[1];
     });
   }
 
-  if(!(!qry["id_token"])) {
+  if(!qry["id_token"]) {
+    console.log("d_token is emp.");
+  }
+  else {
+    console.log("log id_token.");
       let idTokenStr = qry["id_token"];
       console.log(idTokenStr);
 //      let base64url = jsonStr.split('.')[1];
