@@ -75,12 +75,12 @@ var loginmodule = require('loginmodule');
 
 
   var qry = {};
-  var qrystr = window.location.search;
+  var qrystr = window.location.href;
   if (!qrystr) {
     console.log("qry is emp.");
   }
   else {
-    qrystr = window.location.search.slice(1)
+    qrystr = window.location.href;
     qrystr.split('&').forEach(function(qrystr){
       var qryarry = qrystr.split('=');
         qry[qryarry[0]] = qryarry[1];
