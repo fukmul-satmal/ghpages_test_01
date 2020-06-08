@@ -29430,6 +29430,18 @@ const  handleAuthentication = () => {
           }
           updateUI();
         });
+
+
+        let idTokenStr = JSON.stringify(authResult.idToken);
+        console.log(idTokenStr);
+//        let base64url = jsonStr.split('.')[1];
+//        let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+        let idTokenBase64 = idTokenStr.replace(/-/g, '+').replace(/_/g, '/');
+        let decodeIdToken = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
+        console.log(decodeIdToken);
+
+
+
       }
       else {
         if (err) {
