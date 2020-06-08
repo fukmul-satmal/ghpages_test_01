@@ -29225,6 +29225,25 @@ const getRndStr = () => {
 
 window.onload = async () => {
 
+  let qry = {};
+  let qrystr = window.location.search.slice(1);
+  if (!(!qrystr)) {
+    qrystr.split('&').forEach(function(qrystr){
+      let qryarry = qrystr.split('=');
+        qry[qryarry[0]] = qryarry[1];
+    });
+  }
+
+  if(!(!qry["id_token"])) {
+      let idTokenStr = qry["id_token"];
+      console.log(idTokenStr);
+//      let base64url = jsonStr.split('.')[1];
+//      let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+      let idTokenBase64 = idTokenStr.replace(/-/g, '+').replace(/_/g, '/');
+      let decodeIdToken = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
+      console.log(decodeIdToken);
+  }
+
   let verifier = window.sessionStorage.getItem("verifier");
   if (!verifier) {
     let baseStr = getRndStr();
@@ -29430,17 +29449,6 @@ const  handleAuthentication = () => {
           }
           updateUI();
         });
-
-
-        let idTokenStr = JSON.stringify(authResult.idToken);
-        console.log(idTokenStr);
-//        let base64url = jsonStr.split('.')[1];
-//        let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
-        let idTokenBase64 = idTokenStr.replace(/-/g, '+').replace(/_/g, '/');
-        let decodeIdToken = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
-        console.log(decodeIdToken);
-
-
 
       }
       else {
