@@ -29226,11 +29226,12 @@ const getRndStr = () => {
 window.onload = async () => {
 
   let qry = {};
-  let qrystr = window.location.search.slice(1);
+  let qrystr = window.location.search;
   if (!qrystr) {
     console.log("qry is emp.");
   }
   else {
+    qrystr = window.location.search.slice(1)
     qrystr.split('&').forEach(function(qrystr){
       let qryarry = qrystr.split('=');
         qry[qryarry[0]] = qryarry[1];
@@ -29242,7 +29243,7 @@ window.onload = async () => {
   }
   else {
     console.log("log id_token.");
-      let idTokenStr = qry["id_token"];
+      let idTokenStr = JSON.stringify(qry["id_token"]);
       console.log(idTokenStr);
 //      let base64url = jsonStr.split('.')[1];
 //      let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
