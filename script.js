@@ -29233,6 +29233,7 @@ window.onload = async () => {
     window.sessionStorage.setItem("verifier", verifier);
   }
   document.getElementById("verifier").value = verifier;
+  document.getElementById("nonce").value = verifier;
 
   await configureClient();
 
@@ -29292,7 +29293,8 @@ const login = async () => {
       responseType: 'token id_token code',
       scope: 'openid profile',
       code_challenge: challenge,
-      code_challenge_method: 'S256'
+      code_challenge_method: 'S256',
+      nonce: nonce
     });
 
   }
