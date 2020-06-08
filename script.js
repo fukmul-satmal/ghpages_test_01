@@ -29225,32 +29225,6 @@ const getRndStr = () => {
 
 window.onload = async () => {
 
-  let qry = {};
-  let qrystr = window.location.search;
-  if (!qrystr) {
-    console.log("qry is emp.");
-  }
-  else {
-    qrystr = window.location.search.slice(1)
-    qrystr.split('&').forEach(function(qrystr){
-      let qryarry = qrystr.split('=');
-        qry[qryarry[0]] = qryarry[1];
-    });
-  }
-
-  if(!qry["id_token"]) {
-    console.log("d_token is emp.");
-  }
-  else {
-    console.log("log id_token.");
-      let idTokenStr = JSON.stringify(qry["id_token"]);
-      console.log(idTokenStr);
-//      let base64url = jsonStr.split('.')[1];
-//      let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
-      let idTokenBase64 = idTokenStr.replace(/-/g, '+').replace(/_/g, '/');
-      let decodeIdToken = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
-      console.log(decodeIdToken);
-  }
 
   let verifier = window.sessionStorage.getItem("verifier");
   if (!verifier) {
@@ -29557,7 +29531,5 @@ const updateUI = () => {
 
 module.exports.login = login;
 module.exports.logout = logout;
-
-
 
 },{"crypto":73}]},{},[]);
