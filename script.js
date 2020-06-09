@@ -29290,7 +29290,7 @@ const login = async () => {
     console.log("challenge is " + challenge);
     console.log(challenge.length);
     webAuth0.authorize({
-      redirectUri: window.location.origin + APP_PATH + "?nonce=" + nonce,
+      redirectUri: window.location.origin + APP_PATH,
       responseType: 'token id_token code',
       scope: 'openid profile',
       code_challenge: challenge,
