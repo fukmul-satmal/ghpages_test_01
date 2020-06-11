@@ -29398,8 +29398,8 @@ const renewSession = () => {
             alert(`Error: ${err.error}. Check the console for further details.`);
           }
           else if (user) {
-            console.log("userinfo get.")
-            setSession(authResult);
+            console.log("userinfo get.");
+            setSession(authResult, user);
           }
           updateUI();
         });
@@ -29426,7 +29426,7 @@ const  handleAuthentication = () => {
             alert(`Error: ${err.error}. Check the console for further details.`);
           }
           else if (user) {
-            console.log("userinfo get.")
+            console.log("userinfo get.");
             setSession(authResult, user);
           }
           updateUI();
@@ -29460,7 +29460,7 @@ const  handleRedirect = () => {
             alert(`Error: ${err.error}. Check the console for further details.`);
           }
           else if (user) {
-            console.log("userinfo get.")
+            console.log("userinfo get.");
             setSession(authResult, user);
           }
           updateUI();
@@ -29529,7 +29529,29 @@ const updateUI = () => {
   }
 };
 
+const getUserByAccessToken = () => {
+
+  console.log("getUserByAccessToken do.");
+  let acssToken = document.getElementById("access_token").value;
+
+  webAuth0.client.userInfo(acssToken, (err, user) => {
+    if (err) {
+      console.log(err);
+      alert(`Error: ${err.error}. Check the console for further details.`);
+    }
+    else if (user) {
+      console.log("getUserByAccessToken.");
+      console.log(user);
+      document.getElementById("ipt-user-profile").innerHTML = JSON.stringify(
+        user
+      );
+    }
+  });
+}
+
+
 module.exports.login = login;
 module.exports.logout = logout;
+module.exports.getUserByAccessToken = getUserByAccessToken;
 
 },{"crypto":73}]},{},[]);
