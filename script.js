@@ -29268,6 +29268,7 @@ const login = async () => {
   let nonce = document.getElementById("nonce").value;
   let code = document.getElementById("code").value;
   let verifier = document.getElementById("verifier").value;
+  let grant_type = document.getElementById("grant_type").value;
 
   console.log("user is ; " + user);
   console.log("pass is ; " + pass);
@@ -29275,6 +29276,7 @@ const login = async () => {
   console.log("nonce is ; " + nonce);
   console.log("code is ; " + code);
   console.log("verifier is ; " + verifier);
+  console.log("grant_type is ; " + grant_type);
 
   let challenge = "";
   if(!verifier) {
@@ -29292,7 +29294,7 @@ const login = async () => {
     webAuth0.authorize({
       redirectUri: window.location.origin + APP_PATH,
       responseType: 'token id_token code',
-      scope: 'openid profile',
+      scope: 'openid profile offline_access',
       code_challenge: challenge,
       code_challenge_method: 'S256',
       nonce: nonce
@@ -29302,11 +29304,13 @@ const login = async () => {
   else {
     document.codepost.code.value = code;
     document.codepost.code_verifier.value = verifier;
+    document.codepost.grant_type.value = grant_type;
     document.codepost.client_id.value = config.clientId;
     document.codepost.redirect_uri.value = window.location.origin + APP_PATH;
 
     console.log("hidden code is " + document.codepost.code.value);
     console.log("hidden code_verifier is " + document.codepost.code_verifier.value);
+    console.log("hidden grant_type is " + document.codepost.grant_type.value);
     console.log("hidden client_id is " + document.codepost.client_id.value);
     console.log("hidden grant_type is " + document.codepost.grant_type.value);
     console.log("hidden redirect_uri is " + document.codepost.redirect_uri.value);
@@ -29549,9 +29553,56 @@ const getUserByAccessToken = () => {
   });
 }
 
+const getRefreshToken = () => {
+
+    console.log("getRefreshToken do.");
+    let rfrshToken = document.getElementById("refresh_token").value;
+    let grant_type = document.getElementById("grant_type").value;
+
+    document.codepost.grant_type.value = grant_type;
+    document.codepost.client_id.value = config.clientId;
+
+    console.log("hidden grant_type is " + document.codepost.grant_type.value);
+    console.log("hidden client_id is " + document.codepost.client_id.value);
+
+    let bodydata = {};
+    bodydata["grant_type"] = document.codepost.grant_type.value;
+    bodydata["client_id"] = document.codepost.client_id.value;
+    bodydata["refresh_token"] = rfrshToken;
+
+    let sendForm = new FormData(document.getElementById('codepost_id'));
+
+    fetch("https://fukmul-satmal.auth0.com/oauth/token", {
+        method: "POST",
+        cache: "no-cache",
+        headers: {	
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(bodydata)
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((resJson) => {
+        let jsonStr = JSON.stringify(resJson);
+        console.log(jsonStr);
+        let base64url = jsonStr.split('.')[1];
+        let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+        let decodeJson = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+        console.log(decodeJson);
+    })
+    .catch((error) => {
+        console.log("Error!");
+        console.error(error);
+    });
+
+}
+
+
 
 module.exports.login = login;
 module.exports.logout = logout;
 module.exports.getUserByAccessToken = getUserByAccessToken;
+module.exports.getRefreshToken = getRefreshToken;
 
 },{"crypto":73}]},{},[]);
