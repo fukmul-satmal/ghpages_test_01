@@ -29293,7 +29293,8 @@ const login = async () => {
     console.log(challenge.length);
     webAuth0.authorize({
       redirectUri: window.location.origin + APP_PATH,
-      responseType: 'token id_token code',
+//      responseType: 'token id_token code',
+      responseType: 'token code',
       scope: 'openid profile offline_access',
       code_challenge: challenge,
       code_challenge_method: 'S256',
