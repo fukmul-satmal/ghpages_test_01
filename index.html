@@ -33,6 +33,7 @@
 <button id="btn-login" onclick="loginmodule.login();">Log in</button>
 <button id="btn-logout" onclick="loginmodule.logout();">Log out</button>
 <button id="btn-getUserByAccessToken" onclick="loginmodule.getUserByAccessToken();">getUser</button>
+<button id="btn-getRefreshToken" onclick="loginmodule.getRefreshToken();">getRefreshToken</button>
 <div>
   user:<input type="text" id="user" /><br/>
   pass:<input type="text" id="pass" /><br/>
@@ -40,7 +41,10 @@
   nonce:<input type="text" id="nonce" /><br/>
   code:<input type="text" id="code" /><br/>
   verifier:<input type="text" id="verifier" /><br/>
+  grant_type:<input type="text" id="grant_type" value="authorization_code" /><br/>
   access_token:<input type="text" id="access_token" /><br/>
+  refresh_token:<input type="text" id="refresh_token" /><br/>
+
 </div>
 <form id="codepost_id" name="codepost">
   <input type="hidden" name="code" value="" />
@@ -97,7 +101,7 @@ var loginmodule = require('loginmodule');
       var idTokenStr = JSON.stringify(qry["id_token"]);
       console.log(idTokenStr);
       var base64IdToken = idTokenStr.split('.')[1];
-//      let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+      let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
       var idTokenBase64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/');
       var decodeIdToken = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
       console.log(decodeIdToken);
