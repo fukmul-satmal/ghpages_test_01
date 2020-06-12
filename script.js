@@ -29294,7 +29294,6 @@ const login = async () => {
     webAuth0.authorize({
       redirectUri: window.location.origin + APP_PATH,
       responseType: 'token id_token code',
-//      responseType: 'token code',
       scope: 'offline_access openid profile',
       code_challenge: challenge,
       code_challenge_method: 'S256',
@@ -29341,8 +29340,7 @@ const login = async () => {
         let jsonStr = JSON.stringify(resJson);
         console.log(jsonStr);
 
-//        let base64url = jsonStr.split('.')[1];
-        let base64url = jsonStr.split('.')[2];
+        let base64url = resJson['id_token'].split('.')[1];
         let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
         let decodeJson = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
         console.log(decodeJson);
