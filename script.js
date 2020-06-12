@@ -29340,7 +29340,9 @@ const login = async () => {
     .then((resJson) => {
         let jsonStr = JSON.stringify(resJson);
         console.log(jsonStr);
-        let base64url = jsonStr.split('.')[1];
+
+//        let base64url = jsonStr.split('.')[1];
+        let base64url = jsonStr.split('.')[2];
         let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
         let decodeJson = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
         console.log(decodeJson);
