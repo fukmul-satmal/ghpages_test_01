@@ -29294,11 +29294,11 @@ const login = async () => {
     webAuth0.authorize({
       redirectUri: window.location.origin + APP_PATH,
 //      responseType: 'token id_token code',
-      responseType: 'code',
-//      scope: 'offline_access openid profile',
-      scope: 'offline_access',
+      responseType: 'token code',
+      scope: 'offline_access openid profile',
       code_challenge: challenge,
       code_challenge_method: 'S256',
+      audience: 'https://fukmul-satmal.github.io/ghpages_test_01/',
       nonce: nonce
     });
 
