@@ -29295,7 +29295,8 @@ const login = async () => {
       redirectUri: window.location.origin + APP_PATH,
 //      responseType: 'token id_token code',
       responseType: 'code',
-      scope: 'offline_access openid profile',
+//      scope: 'offline_access openid profile',
+      scope: 'offline_access',
       code_challenge: challenge,
       code_challenge_method: 'S256',
       nonce: nonce
