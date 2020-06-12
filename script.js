@@ -29298,7 +29298,7 @@ const login = async () => {
       scope: 'offline_access openid profile',
       code_challenge: challenge,
       code_challenge_method: 'S256',
-      audience: 'https://fukmul-satmal.auth0.com/userinfo',
+//      audience: 'https://fukmul-satmal.auth0.com/userinfo',
       nonce: nonce
     });
 
