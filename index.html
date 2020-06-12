@@ -94,7 +94,7 @@ var loginmodule = require('loginmodule');
   }
 
   if(!qry["id_token"]) {
-    console.log("d_token is emp.");
+    console.log("id_token is emp.");
   }
   else {
     console.log("log id_token.");
@@ -105,6 +105,13 @@ var loginmodule = require('loginmodule');
       var idTokenBase64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/');
       var decodeIdToken = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
       console.log(decodeIdToken);
+  }
+
+  if(!qry["code"]) {
+    console.log("code is emp.");
+  }
+  else {
+    document.getElementById("code").value = qry["code"];
   }
 
 
