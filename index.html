@@ -100,11 +100,23 @@ var loginmodule = require('loginmodule');
     console.log("log id_token.");
       var idTokenStr = JSON.stringify(qry["id_token"]);
       console.log(idTokenStr);
-      var base64IdToken = idTokenStr.split('.')[1];
-      let base64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/');
+      var base64IdToken = idTokenStr.split('.')[0];
       var idTokenBase64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/');
-      var decodeIdToken = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
-      console.log(decodeIdToken);
+      var decodeHeader = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
+      console.log("log decodeHeader.");
+      console.log(decodeHeader);
+
+      base64IdToken = idTokenStr.split('.')[1];
+      idTokenBase64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/');
+      var decodeToken = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
+      console.log("log decodeToken.");
+      console.log(decodeToken);
+
+      base64IdToken = idTokenStr.split('.')[2];
+      idTokenBase64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/');
+      var decodeSig = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
+      console.log("log decodeSig.");
+      console.log(decodeSig);
   }
 
   if(!qry["code"]) {

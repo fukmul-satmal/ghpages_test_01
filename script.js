@@ -29338,21 +29338,25 @@ const login = async () => {
     })
     .then((resJson) => {
         let jsonStr = JSON.stringify(resJson);
+        console.log("log jsonStr.");
         console.log(jsonStr);
 
         let base64url = resJson['id_token'].split('.')[0];
         let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
         let decodeHeader = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+        console.log("log decodeHeader.");
         console.log(decodeHeader);
 
         base64url = resJson['id_token'].split('.')[1];
         base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
         let decodeJson = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+        console.log("log decodeJson.");
         console.log(decodeJson);
 
         base64url = resJson['id_token'].split('.')[2];
         base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
         let decodeSig = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+        console.log("log decodeSig.");
         console.log(decodeSig);
     })
     .catch((error) => {
@@ -29597,21 +29601,25 @@ const getRefreshToken = () => {
     })
     .then((resJson) => {
         let jsonStr = JSON.stringify(resJson);
+        console.log("log jsonStr.");
         console.log(jsonStr);
 
         let base64url = resJson['id_token'].split('.')[0];
         let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
         let decodeHeader = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+        console.log("log decodeHeader.");
         console.log(decodeHeader);
 
         base64url = resJson['id_token'].split('.')[1];
         base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
         let decodeJson = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+        console.log("log decodeJson.");
         console.log(decodeJson);
 
         base64url = resJson['id_token'].split('.')[2];
         base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
         let decodeSig = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+        console.log("log decodeSig.");
         console.log(decodeSig);
     })
     .catch((error) => {
