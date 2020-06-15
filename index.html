@@ -99,8 +99,12 @@ var loginmodule = require('loginmodule');
   else {
     console.log("log id_token.");
       var idTokenStr = JSON.stringify(qry["id_token"]);
-      idTokenStr.replace(/"/g, '');
       console.log(idTokenStr);
+
+
+
+console.log(idTokenStr.charAt(0));
+console.log(idTokenStr.slice(-1));
 
       var base64IdToken = idTokenStr.split('.')[0];
       var idTokenBase64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
