@@ -118,11 +118,11 @@ var loginmodule = require('loginmodule');
       console.log(decodeToken);
 
       base64IdToken = idTokenStr.split('.')[2];
-      idTokenBase64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
-      var decodeSig = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
+//      idTokenBase64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
+//      var decodeSig = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
       console.log("log decodeSig.");
       console.log(base64IdToken);
-      console.log(decodeSig);
+//      console.log(decodeSig);
   }
 
   if(!qry["code"]) {

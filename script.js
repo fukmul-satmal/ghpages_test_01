@@ -29354,10 +29354,10 @@ const login = async () => {
         console.log(decodeJson);
 
         base64url = resJson['id_token'].split('.')[2];
-        base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
-        let decodeSig = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+//        base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+//        let decodeSig = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
         console.log("log decodeSig.");
-        console.log(decodeSig);
+        console.log(base64url);
     })
     .catch((error) => {
         console.log("Error!");
@@ -29617,10 +29617,10 @@ const getRefreshToken = () => {
         console.log(decodeJson);
 
         base64url = resJson['id_token'].split('.')[2];
-        base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
-        let decodeSig = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+//        base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+//        let decodeSig = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
         console.log("log decodeSig.");
-        console.log(decodeSig);
+        console.log(base64url);
     })
     .catch((error) => {
         console.log("Error!");
