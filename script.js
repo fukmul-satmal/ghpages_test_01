@@ -29588,10 +29588,21 @@ const getRefreshToken = () => {
     .then((resJson) => {
         let jsonStr = JSON.stringify(resJson);
         console.log(jsonStr);
-        let base64url = resJson['id_token'].split('.')[1];
+
+        let base64url = resJson['id_token'].split('.')[0];
         let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+        let decodeHeader = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+        console.log(decodeHeader);
+
+        base64url = resJson['id_token'].split('.')[1];
+        base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
         let decodeJson = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
         console.log(decodeJson);
+
+        base64url = resJson['id_token'].split('.')[1];
+        base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
+        let decodeSig = JSON.parse(decodeURIComponent(escape(window.atob(base64))));
+        console.log(decodeSig);
     })
     .catch((error) => {
         console.log("Error!");
