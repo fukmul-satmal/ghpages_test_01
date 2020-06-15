@@ -108,7 +108,14 @@ var loginmodule = require('loginmodule');
 
       base64IdToken = idTokenStr.split('.')[1];
       idTokenBase64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/');
-      var decodeToken = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
+//      var decodeToken = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
+      var decodeToken = window.atob(idTokenBase64);
+      console.log(decodeToken);
+      decodeToken = escape(decodeToken);
+      console.log(decodeToken);
+      decodeToken = decodeURIComponent(decodeToken);
+      console.log(decodeToken);
+      decodeToken = JSON.parse(decodeToken);
       console.log("log decodeToken.");
       console.log(decodeToken);
 
