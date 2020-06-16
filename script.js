@@ -29638,6 +29638,8 @@ const getAllKey = () => {
     let bodydata = {};
     bodydata["client_id"] = client_id;
     bodydata["client_secret"] = client_secret;
+    bodydata["audience"] = "https://fukmul-satmal.auth0.com/api/v2/";
+    bodydata["grant_type"] = "client_credentials";
 
     fetch("https://fukmul-satmal.auth0.com/oauth/token", {
         method: "POST",
@@ -29677,11 +29679,6 @@ const getAllKey = () => {
             console.log("GET Error!");
             console.error(error);
         });
-
-
-
-
-
     })
     .catch((error) => {
         console.log("POST Error!");
