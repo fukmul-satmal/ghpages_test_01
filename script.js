@@ -29632,13 +29632,11 @@ const getRefreshToken = () => {
 const getAllKey = () => {
 
     console.log("getAllKey do.");
+    let client_id = document.getElementById("client_id").value;
     let client_secret = document.getElementById("client_secret").value;
 
-    document.codepost.grant_type.value = grant_type;
-    document.codepost.client_id.value = config.clientId;
-
     let bodydata = {};
-    bodydata["client_id"] = document.codepost.client_id.value;
+    bodydata["client_id"] = client_id;
     bodydata["client_secret"] = client_secret;
 
     fetch("https://fukmul-satmal.auth0.com/oauth/token", {
