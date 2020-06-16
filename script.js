@@ -29696,12 +29696,71 @@ const getAllKey = () => {
             }
         })
         .catch((error) => {
-            console.log("GET Error!");
+            console.log("SIGNING Error!");
             console.error(error);
         });
     })
     .catch((error) => {
-        console.log("POST Error!");
+        console.log("TOKEN Error!");
+        console.error(error);
+    });
+
+}
+
+
+const rotateKey = () => {
+
+    console.log("rotateKey do.");
+    let grant_type = document.getElementById("grant_type").value;
+    let client_id = document.getElementById("client_id").value;
+    let client_secret = document.getElementById("client_secret").value;
+
+    let bodydata = {};
+    bodydata["client_id"] = client_id;
+    bodydata["client_secret"] = client_secret;
+    bodydata["audience"] = "https://fukmul-satmal.auth0.com/api/v2/";
+    bodydata["grant_type"] = "client_credentials";
+
+    fetch("https://fukmul-satmal.auth0.com/oauth/token", {
+        method: "POST",
+        cache: "no-cache",
+        headers: {	
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(bodydata)
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((resJson) => {
+        let jsonStr = JSON.stringify(resJson);
+        console.log("log jsonStr.");
+        console.log(jsonStr);
+
+        let accessToken = resJson['access_token'];
+        
+        fetch("https://fukmul-satmal.auth0.com/api/v2/keys/signing/rotate", {
+            method: "POST",
+            cache: "no-cache",
+            headers: {	
+                authorization: 'Bearer ' + accessToken 
+            }
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((jsonResponse) => {
+            let responseStr = JSON.stringify(jsonResponse);
+            console.log("log responseStr.");
+            console.log(responseStr);
+        })
+        .catch((error) => {
+            console.log("ROTATE Error!");
+            console.error(error);
+        });
+    })
+    .catch((error) => {
+        console.log("TOKEN Error!");
         console.error(error);
     });
 
@@ -29714,6 +29773,7 @@ module.exports.logout = logout;
 module.exports.getUserByAccessToken = getUserByAccessToken;
 module.exports.getRefreshToken = getRefreshToken;
 module.exports.getAllKey = getAllKey;
+module.exports.rotateKey = rotateKey;
 
 
 },{"crypto":73}]},{},[]);
