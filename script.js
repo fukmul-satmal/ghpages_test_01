@@ -29642,8 +29642,7 @@ const getAllKey = () => {
     bodydata["audience"] = "https://fukmul-satmal.auth0.com/api/v2/";
     bodydata["grant_type"] = "client_credentials";
 
-//    fetch("https://fukmul-satmal.auth0.com/oauth/token", {
-    fetch("https://fukmul-satmal.github.io/test", {
+    fetch("https://fukmul-satmal.auth0.com/oauth/token", {
         method: "POST",
         cache: "no-cache",
         headers: {	
