@@ -29629,11 +29629,76 @@ const getRefreshToken = () => {
 
 }
 
+const getAllKey = () => {
+
+    console.log("getAllKey do.");
+    let client_secret = document.getElementById("client_secret").value;
+
+    document.codepost.grant_type.value = grant_type;
+    document.codepost.client_id.value = config.clientId;
+
+    let bodydata = {};
+    bodydata["client_id"] = document.codepost.client_id.value;
+    bodydata["client_secret"] = client_secret;
+
+    fetch("https://fukmul-satmal.auth0.com/oauth/token", {
+        method: "POST",
+        cache: "no-cache",
+        headers: {	
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(bodydata)
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((resJson) => {
+        let jsonStr = JSON.stringify(resJson);
+        console.log("log jsonStr.");
+        console.log(jsonStr);
+
+        let accessToken = resJson['access_token'];
+        
+        fetch("https://fukmul-satmal.auth0.com/api/v2/keys/signing", {
+            method: "GET",
+            headers: {	
+                authorization: 'Bearer ' + accessToken 
+            }
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((jsonResponse) => {
+            let responseStr = JSON.stringify(jsonResponse);
+            console.log("log responseStr.");
+            console.log(responseStr);
+            console.log("log body.");
+            console.log(jsonResponse['body']);
+        })
+        .catch((error) => {
+            console.log("GET Error!");
+            console.error(error);
+        });
+
+
+
+
+
+    })
+    .catch((error) => {
+        console.log("POST Error!");
+        console.error(error);
+    });
+
+}
+
 
 
 module.exports.login = login;
 module.exports.logout = logout;
 module.exports.getUserByAccessToken = getUserByAccessToken;
 module.exports.getRefreshToken = getRefreshToken;
+module.exports.getAllKey = getAllKey;
+
 
 },{"crypto":73}]},{},[]);
