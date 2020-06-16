@@ -29632,6 +29632,7 @@ const getRefreshToken = () => {
 const getAllKey = () => {
 
     console.log("getAllKey do.");
+    let grant_type = document.getElementById("grant_type").value;
     let client_id = document.getElementById("client_id").value;
     let client_secret = document.getElementById("client_secret").value;
 
