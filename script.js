@@ -29683,6 +29683,9 @@ const getAllKey = () => {
                     else if(item["next"]) {
                         console.log("next key is " + item["kid"]);
                     }
+                    else if(item["previous"]) {
+                        console.log("previous key is " + item["kid"]);
+                    }
                 })
             }
             else {
@@ -29692,6 +29695,9 @@ const getAllKey = () => {
                 }
                 else if(jsonResponse["next"]) {
                     console.log("next key is " + jsonResponse["kid"]);
+                }
+                else if(item["previous"]) {
+                    console.log("previous key is " + item["kid"]);
                 }
             }
         })
