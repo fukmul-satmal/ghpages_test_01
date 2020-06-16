@@ -29673,8 +29673,27 @@ const getAllKey = () => {
             let responseStr = JSON.stringify(jsonResponse);
             console.log("log responseStr.");
             console.log(responseStr);
-            console.log("log body.");
-            console.log(jsonResponse['body']);
+
+            if(jsonResponse instanceof Array) {
+                console.log("jsonResponse is array.");
+                jsonResponse.forEach(function(item) {
+                    if(item["current"]) {
+                        console.log("current key is " + item["kid"]);
+                    }
+                    else if(item["next"]) {
+                        console.log("next key is " + item["kid"]);
+                    }
+                })
+            }
+            else {
+                console.log("jsonResponse is not array.");
+                if(jsonResponse["current"]) {
+                    console.log("current key is " + jsonResponse["kid"]);
+                }
+                else if(jsonResponse["next"]) {
+                    console.log("next key is " + jsonResponse["kid"]);
+                }
+            }
         })
         .catch((error) => {
             console.log("GET Error!");
