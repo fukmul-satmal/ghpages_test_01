@@ -37032,6 +37032,9 @@ window.onload = async () => {
       console.log("target kid");
       console.log(decodeHeader["kid"]);
 
+      console.log("jwks");
+      console.log(jwks);
+
       let jwk = jwks.keys.find(k => k.kid == decodeHeader["kid"]);
       if(!jwk) {
           console.log("jwk not found error.");
