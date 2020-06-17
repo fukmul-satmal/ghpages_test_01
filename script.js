@@ -36985,6 +36985,81 @@ const getRndStr = () => {
 
 window.onload = async () => {
 
+  var qry = {};
+  var qrystr = window.location.href;
+  if (!qrystr) {
+    console.log("qry is emp.");
+  }
+  else {
+    qrystr = window.location.href;
+    qrystr.split('&').forEach(function(qrystr){
+      var qryarry = qrystr.split('=');
+        qry[qryarry[0]] = qryarry[1];
+    });
+  }
+
+  if(!qry["id_token"]) {
+    console.log("id_token is emp.");
+  }
+  else {
+    console.log("log id_token.");
+      var idTokenStr = JSON.stringify(qry["id_token"]);
+      idTokenStr = idTokenStr.slice(1);
+      idTokenStr = idTokenStr.slice(0, -1);
+      console.log(idTokenStr);
+
+      var base64IdToken = idTokenStr.split('.')[0];
+      var idTokenBase64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
+      var decodeHeader = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
+      console.log("log decodeHeader.");
+      console.log(base64IdToken);
+      console.log(decodeHeader);
+
+      base64IdToken = idTokenStr.split('.')[1];
+      idTokenBase64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
+      var decodeToken = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
+      console.log("log decodeToken.");
+      console.log(base64IdToken);
+      console.log(decodeToken);
+
+      base64IdToken = idTokenStr.split('.')[2];
+//      idTokenBase64 = base64IdToken.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
+//      var decodeSig = JSON.parse(decodeURIComponent(escape(window.atob(idTokenBase64))));
+      console.log("log decodeSig.");
+      console.log(base64IdToken);
+//      console.log(decodeSig);
+
+      console.log("target kid");
+      console.log(decodeHeader["kid"]);
+
+      let jwk = jwks.keys.find(k => k.kid == decodeHeader["kid"]);
+      if(!jwk) {
+          console.log("jwk not found error.");
+      }
+      else {
+          console.log("jwk");
+          console.log(jwk);
+          let pem = jwkToPem(jwk);
+          let token = jsonwebtoken.decode(qry["id_token"]);
+          jsonwebtoken.verify(token, pem, (error, claim) => {
+            if (error) {
+              console.log(error);
+            }
+            else {
+              console.log("claim");
+              console.log(claim);
+            }
+          });
+      }
+  }
+
+  if(!qry["code"]) {
+    console.log("code is emp.");
+  }
+  else {
+    document.getElementById("code").value = qry["code"];
+  }
+
   let verifier = window.sessionStorage.getItem("verifier");
   if (!verifier) {
     let baseStr = getRndStr();
