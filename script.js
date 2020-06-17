@@ -37046,7 +37046,7 @@ window.onload = async () => {
           console.log(jwk);
 
           let pem = jwkToPem(jwk);
-          let token = jsonwebtoken.decode(qry["id_token"], {complete: true});
+          let token = jsonwebtoken.decode(qry["id_token"]);
 
           console.log("token");
           console.log(token);
