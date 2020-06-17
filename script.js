@@ -36938,7 +36938,7 @@ module.exports = rsaJwkToBuffer;
 const crypto = require("crypto");
 const jsonwebtoken = require("jsonwebtoken");
 const jwkToPem = require("jwk-to-pem");
-const jwks = () => fetch("https://fukmul-satmal.auth0.com/.well-known/jwks.json");
+const jwkspage = () => fetch("https://fukmul-satmal.auth0.com/.well-known/jwks.json");
 const APP_PATH = '/ghpages_test_01'; // https://ユーザー名.github.io/<ココ> or ルートパス利用なら`/`だけでOK
 
 let webAuth0 = null;
@@ -37032,6 +37032,8 @@ window.onload = async () => {
       console.log("target kid");
       console.log(decodeHeader["kid"]);
 
+      let response = await jwkspage();
+      let jwks = await response.json();
       console.log("jwks");
       console.log(jwks);
 
