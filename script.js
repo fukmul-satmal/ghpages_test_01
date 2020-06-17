@@ -37046,12 +37046,12 @@ window.onload = async () => {
           console.log(jwk);
 
           let pem = jwkToPem(jwk);
-          let token = jsonwebtoken.decode(qry["id_token"]);
+          let token = jsonwebtoken.decode(qry["id_token"], {complete: true});
 
           console.log("token");
           console.log(token);
 
-          jsonwebtoken.verify(token, pem, (error, claim) => {
+          jsonwebtoken.verify(JSON.stringify(token), pem, (error, claim) => {
             if (error) {
               console.log(error);
             }
