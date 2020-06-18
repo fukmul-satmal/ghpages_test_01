@@ -37053,10 +37053,13 @@ window.onload = async () => {
 //          jsonwebtoken.verify(qry["id_token"], pem, (error, claim) => {
           jsonwebtoken.verify(qry["id_token"], jwk.x5c[0], (error, claim) => {
             if (error) {
+              console.log("verify error.");
+              console.log("error is ");
               console.log(error);
             }
             else {
-              console.log("claim");
+              console.log("verify.");
+              console.log("claim is ");
               console.log(claim);
             }
           });
