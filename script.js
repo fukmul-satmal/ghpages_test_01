@@ -36947,6 +36947,7 @@ let idToken = null;
 let userInfo = null;
 let expiresAt = 0;
 let config = null;
+let jwks = null;
 
 const fetchAuthConfig = () => fetch("auth_config.json"); // auth_config.json読み込み
 
@@ -37033,7 +37034,7 @@ window.onload = async () => {
       console.log(decodeHeader["kid"]);
 
       let response = await jwkspage();
-      let jwks = await response.json();
+      jwks = await response.json();
       console.log("jwks");
       console.log(jwks);
 
@@ -37507,6 +37508,58 @@ const getAllKey = () => {
         console.log(jsonStr);
 
         let accessToken = resJson['access_token'];
+
+
+        let accessTokenStr = JSON.stringify(accessToken);
+
+        accessTokenStr = accessTokenStr.slice(1);
+        accessTokenStr = accessTokenStr.slice(0, -1);
+        console.log("log accessTokenStr.");
+        console.log(accessTokenStr);
+
+        let decodeHeader = JSON.parse(jsonwebtoken.decode(accessTokenStr.split('.')[0]));
+        console.log("log decodeHeader.");
+        console.log(decodeHeader);
+
+        let decodeToken = JSON.parse(jsonwebtoken.decode(accessTokenStr.split('.')[1]));
+        console.log("log decodeToken.");
+        console.log(decodeToken);
+
+        let decodeSig = accessTokenStr.split('.')[2];
+        console.log("log decodeSig.");
+        console.log(decodeSig);
+
+        console.log("target kid");
+        console.log(decodeHeader["kid"]);
+
+        console.log("jwks");
+        console.log(jwks);
+
+        let jwk = jwks.keys.find(k => k.kid == decodeHeader["kid"]);
+        if(!jwk) {
+          console.log("jwk not found error.");
+        }
+        else {
+          let x5c = jwk.x5c[0];
+          jwk.x5c[0] = `-----BEGIN CERTIFICATE-----\n${x5c}\n-----END CERTIFICATE-----\n`;
+
+          console.log("jwk");
+          console.log(jwk);
+
+          jsonwebtoken.verify(accessTokenStr, jwk.x5c[0], (error, claim) => {
+            if (error) {
+              console.log("verify error.");
+              console.log("error is ");
+              console.log(error);
+            }
+            else {
+              console.log("verify.");
+              console.log("claim is ");
+              console.log(claim);
+            }
+          });
+        }
+
         
         fetch("https://fukmul-satmal.auth0.com/api/v2/keys/signing", {
             method: "GET",
