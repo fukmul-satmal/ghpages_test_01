@@ -37538,9 +37538,7 @@ const getAllKey = () => {
         console.log("jwks");
         console.log(jwks);
 
-//        let jwk = jwks.keys.find(k => k.kid == decodeHeader["kid"]);
-        let jwk = jwks.keys.find(k => k.kid == 'TxBee6Pr8-A1OWk5zPS1r');
-//        let jwk = jwks.keys.find(k => k.kid == 'hBIwLw8QOHTpfWxW1XuTF');
+        let jwk = jwks.keys.find(k => k.kid == decodeHeader["kid"]);
 
         if(!jwk) {
           console.log("jwk not found error.");
