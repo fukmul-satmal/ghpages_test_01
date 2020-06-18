@@ -37517,11 +37517,13 @@ const getAllKey = () => {
         console.log("log accessTokenStr.");
         console.log(accessTokenStr);
 
-        let decodeHeader = JSON.parse(jsonwebtoken.decode(accessTokenStr.split('.')[0]));
+        let accessTokenDec = jsonwebtoken.decode(accessTokenStr);
+
+        let decodeHeader = accessTokenDec.header;
         console.log("log decodeHeader.");
         console.log(decodeHeader);
 
-        let decodeToken = JSON.parse(jsonwebtoken.decode(accessTokenStr.split('.')[1]));
+        let decodeToken = accessTokenDec.payload;
         console.log("log decodeToken.");
         console.log(decodeToken);
 
