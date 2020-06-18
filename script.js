@@ -37517,7 +37517,7 @@ const getAllKey = () => {
         console.log("log accessTokenStr.");
         console.log(accessTokenStr);
 
-        let accessTokenDec = jsonwebtoken.decode(accessTokenStr);
+        let accessTokenDec = jsonwebtoken.decode(accessTokenStr, {complete: true});
 
         let decodeHeader = accessTokenDec.header;
         console.log("log decodeHeader.");
