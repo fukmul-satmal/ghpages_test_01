@@ -37560,6 +37560,8 @@ const getAllKey = () => {
               console.log("verify.");
               console.log("claim is ");
               console.log(claim);
+
+              localStorage.setItem("previous_token", accessTokenStr);
             }
           });
         }
@@ -37664,6 +37666,52 @@ const rotateKey = () => {
             let responseStr = JSON.stringify(jsonResponse);
             console.log("log responseStr.");
             console.log(responseStr);
+
+
+            let accessTokenStr = localStrage.getItem("previous_token");
+
+            console.log("log accessTokenStr.");
+            console.log(accessTokenStr);
+
+            let accessTokenDec = jsonwebtoken.decode(accessTokenStr, {complete: true});
+
+            let decodeHeader = accessTokenDec.header;
+            console.log("log decodeHeader.");
+            console.log(decodeHeader);
+
+            console.log("target kid");
+            console.log(decodeHeader["kid"]);
+
+            console.log("jwks");
+            console.log(jwks);
+
+            let jwk = jwks.keys.find(k => k.kid == decodeHeader["kid"]);
+
+            if(!jwk) {
+              console.log("jwk not found error.");
+            }
+            else {
+              let x5c = jwk.x5c[0];
+              jwk.x5c[0] = `-----BEGIN CERTIFICATE-----\n${x5c}\n-----END CERTIFICATE-----\n`;
+
+              console.log("jwk");
+              console.log(jwk);
+
+              jsonwebtoken.verify(accessTokenStr, jwk.x5c[0], (error, claim) => {
+                if (error) {
+                  console.log("verify error.");
+                  console.log("error is ");
+                  console.log(error);
+                }
+                else {
+                  console.log("verify.");
+                  console.log("claim is ");
+                  console.log(claim);
+                }
+              });
+            }
+
+
         })
         .catch((error) => {
             console.log("ROTATE Error!");
