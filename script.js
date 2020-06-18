@@ -37668,7 +37668,7 @@ const rotateKey = () => {
             console.log(responseStr);
 
 
-            let accessTokenStr = localStrage.getItem("previous_token");
+            let accessTokenStr = localStorage.getItem("previous_token");
 
             console.log("log accessTokenStr.");
             console.log(accessTokenStr);
