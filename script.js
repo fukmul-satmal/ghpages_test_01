@@ -37037,7 +37037,8 @@ window.onload = async () => {
       console.log("jwks");
       console.log(jwks);
 
-      let jwk = jwks.keys.find(k => k.kid == decodeHeader["kid"]);
+//      let jwk = jwks.keys.find(k => k.kid == decodeHeader["kid"]);
+      let jwk = jwks.keys.find(k => k.kid != decodeHeader["kid"]);
       if(!jwk) {
           console.log("jwk not found error.");
       }
