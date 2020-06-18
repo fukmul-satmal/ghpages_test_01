@@ -36986,6 +36986,9 @@ const getRndStr = () => {
 
 window.onload = async () => {
 
+  let response = await jwkspage();
+  jwks = await response.json();
+
   var qry = {};
   var qrystr = window.location.href;
   if (!qrystr) {
@@ -37033,8 +37036,6 @@ window.onload = async () => {
       console.log("target kid");
       console.log(decodeHeader["kid"]);
 
-      let response = await jwkspage();
-      jwks = await response.json();
       console.log("jwks");
       console.log(jwks);
 
