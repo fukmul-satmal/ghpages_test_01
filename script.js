@@ -37709,11 +37709,10 @@ const verifyOldToken = () => {
 
 //            let response = await jwkspage();
 //            let jwks = await response.json();
-              let jwks = 
-                jwkspage()
-                .then((response) => {
-                  return response.json();
-                });
+              let jwks = null;
+              jwkspage().then((response) => {
+                  jwks = response.json();
+              });
 
             console.log("jwks");
             console.log(jwks);
