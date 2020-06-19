@@ -37651,7 +37651,10 @@ const rotateKey = () => {
         console.log("log jsonStr.");
         console.log(jsonStr);
 
-        let accessToken = resJson['access_token'];
+
+//        let accessToken = resJson['access_token'];
+        let accessToken = localStorage.getItem("previous_token");
+
         
         fetch("https://fukmul-satmal.auth0.com/api/v2/keys/signing/rotate", {
             method: "POST",
