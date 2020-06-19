@@ -36985,13 +36985,8 @@ const getRndStr = () => {
 
 window.onload = async () => {
 
-//  let response = await jwkspage();
-//  let jwks = await response.json();
-    let jwks = 
-      jwkspage()
-      .then((response) => {
-        return response.json();
-      });
+  let response = await jwkspage();
+  let jwks = await response.json();
 
   var qry = {};
   var qrystr = window.location.href;
@@ -37483,7 +37478,10 @@ const getRefreshToken = () => {
 
 }
 
-const getAllKey = () => {
+const getAllKey = async () => {
+
+    let response = await jwkspage();
+    let jwks = await response.json();
 
     console.log("getAllKey do.");
     let grant_type = document.getElementById("grant_type").value;
@@ -37538,14 +37536,6 @@ const getAllKey = () => {
 
         console.log("target kid");
         console.log(decodeHeader["kid"]);
-
-//        let response = await jwkspage();
-//        let jwks = await response.json();
-          let jwks = 
-            jwkspage()
-            .then((response) => {
-              return response.json();
-            });
 
         console.log("jwks");
         console.log(jwks);
@@ -37709,10 +37699,6 @@ const verifyOldToken = async () => {
 
             let response = await jwkspage();
             let jwks = await response.json();
-//              let jwks = null;
-//              jwkspage().then((response) => {
-//                  jwks = response.json();
-//              });
 
             console.log("jwks");
             console.log(jwks);
