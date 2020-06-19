@@ -37045,7 +37045,7 @@ window.onload = async () => {
       }
       else {
           let x5c = jwk.x5c[0];
-          jwk.x5c[0] = `-----BEGIN CERTIFICATE-----\n${x5c}\n-----END CERTIFICATE-----\n`;
+//          jwk.x5c[0] = `-----BEGIN CERTIFICATE-----\n${x5c}\n-----END CERTIFICATE-----\n`;
 
           console.log("jwk");
           console.log(jwk);
