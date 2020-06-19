@@ -36947,7 +36947,6 @@ let idToken = null;
 let userInfo = null;
 let expiresAt = 0;
 let config = null;
-let jwks = null;
 
 const fetchAuthConfig = () => fetch("auth_config.json"); // auth_config.json読み込み
 
@@ -36986,8 +36985,13 @@ const getRndStr = () => {
 
 window.onload = async () => {
 
-  let response = await jwkspage();
-  jwks = await response.json();
+//  let response = await jwkspage();
+//  let jwks = await response.json();
+    let jwks = 
+      jwkspage()
+      .then((response) => {
+        return response.json();
+      });
 
   var qry = {};
   var qrystr = window.location.href;
@@ -37535,6 +37539,14 @@ const getAllKey = () => {
         console.log("target kid");
         console.log(decodeHeader["kid"]);
 
+//        let response = await jwkspage();
+//        let jwks = await response.json();
+          let jwks = 
+            jwkspage()
+            .then((response) => {
+              return response.json();
+            });
+
         console.log("jwks");
         console.log(jwks);
 
@@ -37666,7 +37678,20 @@ const rotateKey = () => {
             let responseStr = JSON.stringify(jsonResponse);
             console.log("log responseStr.");
             console.log(responseStr);
+        })
+        .catch((error) => {
+            console.log("ROTATE Error!");
+            console.error(error);
+        });
+    })
+    .catch((error) => {
+        console.log("TOKEN Error!");
+        console.error(error);
+    });
 
+}
+
+const verifyOldToken = () => {
 
             let accessTokenStr = localStorage.getItem("previous_token");
 
@@ -37682,6 +37707,14 @@ const rotateKey = () => {
             console.log("target kid");
             console.log(decodeHeader["kid"]);
 
+//            let response = await jwkspage();
+//            let jwks = await response.json();
+              let jwks = 
+                jwkspage()
+                .then((response) => {
+                  return response.json();
+                });
+
             console.log("jwks");
             console.log(jwks);
 
@@ -37691,9 +37724,6 @@ const rotateKey = () => {
               console.log("jwk not found error.");
             }
             else {
-              let x5c = jwk.x5c[0];
-              jwk.x5c[0] = `-----BEGIN CERTIFICATE-----\n${x5c}\n-----END CERTIFICATE-----\n`;
-
               console.log("jwk");
               console.log(jwk);
 
@@ -37711,18 +37741,6 @@ const rotateKey = () => {
               });
             }
 
-
-        })
-        .catch((error) => {
-            console.log("ROTATE Error!");
-            console.error(error);
-        });
-    })
-    .catch((error) => {
-        console.log("TOKEN Error!");
-        console.error(error);
-    });
-
 }
 
 
@@ -37733,6 +37751,7 @@ module.exports.getUserByAccessToken = getUserByAccessToken;
 module.exports.getRefreshToken = getRefreshToken;
 module.exports.getAllKey = getAllKey;
 module.exports.rotateKey = rotateKey;
+module.exports.verifyOldToken = verifyOldToken;
 
 
 },{"crypto":73,"jsonwebtoken":197,"jwk-to-pem":280}]},{},[]);
