@@ -37691,7 +37691,7 @@ const rotateKey = () => {
 
 }
 
-const verifyOldToken = () => {
+const verifyOldToken = async () => {
 
             let accessTokenStr = localStorage.getItem("previous_token");
 
@@ -37707,12 +37707,12 @@ const verifyOldToken = () => {
             console.log("target kid");
             console.log(decodeHeader["kid"]);
 
-//            let response = await jwkspage();
-//            let jwks = await response.json();
-              let jwks = null;
-              jwkspage().then((response) => {
-                  jwks = response.json();
-              });
+            let response = await jwkspage();
+            let jwks = await response.json();
+//              let jwks = null;
+//              jwkspage().then((response) => {
+//                  jwks = response.json();
+//              });
 
             console.log("jwks");
             console.log(jwks);
