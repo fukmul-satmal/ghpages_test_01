@@ -37045,16 +37045,16 @@ window.onload = async () => {
       }
       else {
           let x5c = jwk.x5c[0];
-//          jwk.x5c[0] = `-----BEGIN CERTIFICATE-----\n${x5c}\n-----END CERTIFICATE-----\n`;
+          jwk.x5c[0] = `-----BEGIN CERTIFICATE-----\n${x5c}\n-----END CERTIFICATE-----\n`;
 
           console.log("jwk");
           console.log(jwk);
 
-          let pem = jwkToPem(jwk);
-          console.log("pem");
-          console.log(pem);
-          jsonwebtoken.verify(qry["id_token"], pem, (error, claim) => {
-//          jsonwebtoken.verify(qry["id_token"], jwk.x5c[0], (error, claim) => {
+//          let pem = jwkToPem(jwk);
+//          console.log("pem");
+//          console.log(pem);
+//          jsonwebtoken.verify(qry["id_token"], pem, (error, claim) => {
+          jsonwebtoken.verify(qry["id_token"], jwk.x5c[0], (error, claim) => {
             if (error) {
               console.log("verify error.");
               console.log("error is ");
