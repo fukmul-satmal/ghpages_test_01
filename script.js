@@ -37562,7 +37562,7 @@ const getAllKey = async () => {
               console.log("claim is ");
               console.log(claim);
 
-              localStorage.setItem("previous_token", accessTokenStr);
+//              localStorage.setItem("previous_token", accessTokenStr);
             }
           });
         }
@@ -37652,8 +37652,7 @@ const rotateKey = () => {
         console.log(jsonStr);
 
 
-//        let accessToken = resJson['access_token'];
-        let accessToken = localStorage.getItem("previous_token");
+        let accessToken = resJson['access_token'];
 
         
         fetch("https://fukmul-satmal.auth0.com/api/v2/keys/signing/rotate", {
