@@ -37118,6 +37118,9 @@ window.onload = async () => {
   }
 
   // code flow
+  if(!qry["code"] || !verifier) {
+    return;
+  }
   login();
 };
 
