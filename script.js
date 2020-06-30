@@ -36999,6 +36999,7 @@ window.onload = async () => {
     if (qrystrarry.length > 1) {
       qrystr = qrystrarry[1];
     }
+
     qrystr.split('&').forEach(function(qrystr){
       var qryarry = qrystr.split('=');
         qry[qryarry[0]] = qryarry[1];
@@ -37116,7 +37117,8 @@ window.onload = async () => {
     window.history.replaceState({}, document.title, APP_PATH);
   }
 
-
+  // code flow
+  login();
 };
 
 const login = async () => {
