@@ -36995,6 +36995,10 @@ window.onload = async () => {
   }
   else {
     qrystr = window.location.href;
+    var qrystrarry = qrystr.split('?');
+    if (qrystrarry.length > 1) {
+      qrystr = qrystrarry[1];
+    }
     qrystr.split('&').forEach(function(qrystr){
       var qryarry = qrystr.split('=');
         qry[qryarry[0]] = qryarry[1];
@@ -37093,6 +37097,7 @@ window.onload = async () => {
 
   let authFlg = isAuthenticated();
 
+  console.log("authFlg is " + authFlg);
   if (authFlg) {
     console.log("is Auth.")
     // show the gated content
@@ -37110,6 +37115,8 @@ window.onload = async () => {
     console.log("history replacestate.");
     window.history.replaceState({}, document.title, APP_PATH);
   }
+
+
 };
 
 const login = async () => {
