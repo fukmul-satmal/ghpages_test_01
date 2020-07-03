@@ -37162,6 +37162,7 @@ const login = async () => {
       code_challenge: challenge,
       code_challenge_method: 'S256',
 //      audience: 'https://fukmul-satmal.auth0.com/userinfo',
+      clientId: '3Gg09XTtvfA4mxn4jXiNTkobG2mt3ZRR',
       nonce: nonce
     });
 
