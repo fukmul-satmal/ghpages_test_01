@@ -37155,7 +37155,8 @@ const login = async () => {
     console.log("challenge is " + challenge);
     console.log(challenge.length);
     webAuth0.authorize({
-      redirectUri: window.location.origin + APP_PATH,
+//      redirectUri: window.location.origin + APP_PATH,
+      redirectUri: window.location.origin,
 //      responseType: 'token id_token code',
       responseType: 'code',
       scope: 'offline_access openid profile',
