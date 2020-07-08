@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GitHub Pages (エラーページ)</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="script.js"></script>
+    <style>
+      .hidden {
+        display: none;
+      }
+      
+      label {
+        margin-bottom: 10px;
+        display: block;
+      }
+    </style>
+
+</head>
+
+<body>
+<main>
+  <h1>GitHub Pages のサンプル (エラーページ)</h1>
+  <a href="https://fukmul-satmal.github.io/ghpages_test_01/">__前へ__</a>
+  <p id="current_url"></p>
+</main>
+
+    <div id="gated-content">
+      <p>
+        ERROR!!
+      </p>
+      <label>
+        error: 
+        <pre id="ipt-error"></pre>
+      </label>
+      <label>
+        error_description:
+        <pre id="ipt-error_description"></pre>
+      </label>
+      <label>
+        tracking id:
+        <pre id="ipt-tracking_id"></pre>
+        </label>
+    </div>
+
+<script>
+console.log('GitHub Pages Error Pages');
+
+jQuery( function() {
+//    jQuery( '#current_url' ).text( location.origin );
+    jQuery( '#current_url' ).text( location.href );
+} );
+
+</script>
+</body>
+</html>
