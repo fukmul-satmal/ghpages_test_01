@@ -26,7 +26,7 @@ window.onload = async () => {
         document.getElementById("ipt-error_description").innerHTML = qry.error_description;
       }
 
-      if (qry.trucking) {
+      if (qry.tracking) {
         document.getElementById("ipt-tracking_id").innerHTML = qry.tracking;
       }
     }
