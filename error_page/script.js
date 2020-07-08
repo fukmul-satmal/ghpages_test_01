@@ -11,7 +11,7 @@ window.onload = async () => {
   var qrystr = window.location.href;
   if (qrystr) {
     var qrystrarry = qrystr.split('?');
-    if (Array.isArray(qrystrarry)) }
+    if (Array.isArray(qrystrarry)) {
       qrystr = qrystrarry[1];
       qrystr.split('&').forEach(function(qrystr) {
         var qryarry = qrystr.split('=');
