@@ -23,7 +23,7 @@ window.onload = async () => {
       }
 
       if (qry.error_description) {
-        document.getElementById("ipt-error_description").innerHTML = decodeURLComponent(qry.error_description);
+        document.getElementById("ipt-error_description").innerHTML = decodeURIComponent(qry.error_description);
       }
 
       console.log("tracking_id is " + qry.tracking);
