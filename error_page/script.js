@@ -19,7 +19,7 @@ window.onload = async () => {
       });
 
       if (qry.error) {
-        document.getElementById("ipt-error").innerHTML = qry.error;
+        document.getElementById("ipt-error").innerHTML = decodeURIComponent(qry.error);
       }
 
       if (qry.error_description) {
@@ -28,7 +28,7 @@ window.onload = async () => {
 
       console.log("tracking_id is " + qry.tracking);
       if (qry.tracking) {
-        document.getElementById("ipt-tracking_id").innerHTML = qry.tracking;
+        document.getElementById("ipt-tracking_id").innerHTML = decodeURIComponent(qry.tracking);
       }
     }
   }
