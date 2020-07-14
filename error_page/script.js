@@ -54,6 +54,7 @@ window.onload = async () => {
               throw new Error("Target url not found.");
             })
             .then(function(urlJson) {
+              console.log("urlJson.url is " + urlJson.url);
               document.getElementById("link_back").href = urlJson.url;
             })
             .catch(function(error) {
