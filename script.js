@@ -37006,6 +37006,41 @@ window.onload = async () => {
     });
   }
 
+  if(qry.client_id) {
+    var clientId = qry.client_id;
+    fetch("link.json")
+    .then(function(response) {
+        return resonse.json();
+    })
+    .then(function(linkJson) {
+      var clientLink = linkJson[clientId];
+      if (!clientLink) {
+        throw new Error('client id is unknown.');
+      }
+      else {
+        var filename = clientLink + ".json";
+        fetch(filename)
+        .then(function(response) {
+          if (response.ok) {
+            return response.json();
+          }
+          //
+          throw new Error("Target url not found.");
+        })
+        .then(function(urlJson) {
+          document.getElementById("link_back").href = urlJson.url;
+        })
+        .catch(function(error) {
+          console.error(error);
+        });
+      }
+    })
+    .catch(function(error) {
+      console.error(error);
+    });
+  }
+
+
   if(!qry["id_token"]) {
     console.log("id_token is emp.");
   }
