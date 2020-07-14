@@ -36,7 +36,7 @@ window.onload = async () => {
         var clientId = qry.client_id;
         fetch("../link.json")
         .then(function(response) {
-            return resonse.json();
+            return response.json();
         })
         .then(function(linkJson) {
           var clientLink = linkJson[clientId];
