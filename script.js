@@ -37132,6 +37132,7 @@ const login = async () => {
   let code = document.getElementById("code").value;
   let verifier = document.getElementById("verifier").value;
   let grant_type = document.getElementById("grant_type").value;
+  let inputClientId = document.getElementById("client_id").value;
 
   console.log("user is ; " + user);
   console.log("pass is ; " + pass);
@@ -37152,6 +37153,14 @@ const login = async () => {
   }
 
   if (!code) {
+
+    if (inputClientId != "") {
+      document.codepost.client_id.value = inputClientId;
+    }
+    else {
+      document.codepost.client_id.value = config.clientId;
+    }
+
     console.log("challenge is " + challenge);
     console.log(challenge.length);
     webAuth0.authorize({
@@ -37163,6 +37172,7 @@ const login = async () => {
       code_challenge_method: 'S256',
 //      audience: 'https://fukmul-satmal.auth0.com/userinfo',
 //      clientId: '3Gg09XTtvfA4mxn4jXiNTkobG2mt3ZRR',    //invalid clientId
+      clientId: document.codepost.client_id.value,
       nonce: nonce
     });
 
@@ -37171,14 +37181,8 @@ const login = async () => {
     document.codepost.code.value = code;
     document.codepost.code_verifier.value = verifier;
     document.codepost.grant_type.value = grant_type;
-    if (document.client_id.value != "") {
-      document.codepost.client_id.value = document.client_id.value;
-    }
-    else {
-      document.codepost.client_id.value = config.clientId;
-    }
-    document.codepost.client_id.value = config.clientId;
     document.codepost.redirect_uri.value = window.location.origin + APP_PATH;
+    document.codepost.client_id.value = config.clientId;
 
     console.log("hidden code is " + document.codepost.code.value);
     console.log("hidden code_verifier is " + document.codepost.code_verifier.value);
