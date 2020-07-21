@@ -37171,6 +37171,12 @@ const login = async () => {
     document.codepost.code.value = code;
     document.codepost.code_verifier.value = verifier;
     document.codepost.grant_type.value = grant_type;
+    if (document.client_id.value != "") {
+      document.codepost.client_id.value = document.client_id.value;
+    }
+    else {
+      document.codepost.client_id.value = config.clientId;
+    }
     document.codepost.client_id.value = config.clientId;
     document.codepost.redirect_uri.value = window.location.origin + APP_PATH;
 
