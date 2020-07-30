@@ -37163,7 +37163,8 @@ const login = async () => {
 
     console.log("challenge is " + challenge);
     console.log(challenge.length);
-    webAuth0.authorize({
+//    webAuth0.authorize({
+    webAuth0.popup.authorize({
       redirectUri: window.location.origin + APP_PATH,
 //      responseType: 'token id_token code',
       responseType: 'code',
