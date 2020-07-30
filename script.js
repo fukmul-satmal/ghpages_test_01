@@ -37175,6 +37175,13 @@ const login = async () => {
       clientId: document.codepost.client_id.value,
       nonce: nonce,
       custom_parameter: {code: "123", value:"345"}
+    }, function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log(JSON.stringify(result));
+        }
     });
 
   }
