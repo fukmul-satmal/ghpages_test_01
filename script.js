@@ -37163,8 +37163,8 @@ const login = async () => {
 
     console.log("challenge is " + challenge);
     console.log(challenge.length);
-//    webAuth0.authorize({
-    webAuth0.popup.authorize({
+    webAuth0.authorize({
+//    webAuth0.popup.authorize({
       redirectUri: window.location.origin + APP_PATH,
 //      responseType: 'token id_token code',
       responseType: 'code',
@@ -37176,14 +37176,16 @@ const login = async () => {
       clientId: document.codepost.client_id.value,
       nonce: nonce,
       custom_parameter: {code: "123", value:"345"}
-    }, function(err, result) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            console.log(JSON.stringify(result));
-        }
-    });
+    }
+//    , function(err, result) {
+//        if (err) {
+//            console.log(err);
+//        }
+//        else {
+//            console.log(JSON.stringify(result));
+//        }
+//    }
+    );
 
   }
   else {
