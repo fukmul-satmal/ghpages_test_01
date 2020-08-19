@@ -113932,7 +113932,6 @@ let idToken = null;
 let userInfo = null;
 let expiresAt = 0;
 let config = null;
-let management = null;
 
 const fetchAuthConfig = () => fetch("auth_config.json"); // auth_config.json読み込み
 
@@ -113943,11 +113942,6 @@ const configureClient = async () => {
   webAuth0 = new auth0.WebAuth({
     domain: config.domain,
     clientID: config.clientId
-  });
-
-  managemanet = new auth0.Management({
-    domain: '{YOUR_AUTH0_DOMAIN}',
-    token: '{ACCESS_TOKEN_FROM_THE_USER}'
   });
 };
 
