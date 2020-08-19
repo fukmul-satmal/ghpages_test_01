@@ -114825,8 +114825,17 @@ const getLog = () => {
             domain: 'fukmul-satmal.auth0.com'
         });
 
+        let param = {};
+        if (!log_checkpoint_id) {
+            console.log("checkpoint is empty.");
+        }
+        else {
+            console.log("checkpoint is " + log_checkpoint_id);
+            param["id"] = log_checkpoint_id;
+        }
+
         console.log("get management.");
-        management.getLog({ id : log_checkpoint_id }, function (err, log) {
+        management.getLog(param, function (err, log) {
             if (err) {
                 console.log("GET LOG Error!");
                 console.error(err);
