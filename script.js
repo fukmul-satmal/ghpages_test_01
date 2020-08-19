@@ -114793,6 +114793,7 @@ const getLog = () => {
     console.log("getLog do.");
     let client_id = document.getElementById("client_id").value;
     let client_secret = document.getElementById("client_secret").value;
+    let log_checkpoint_id = document.getElementById("log_checkpoint_id").value;
 
     let bodydata = {};
     bodydata["client_id"] = client_id;
@@ -114825,13 +114826,14 @@ const getLog = () => {
         });
 
         console.log("get management.");
-        management.getLog({}, function (err, log) {
+        management.getLog({ id : log_checkpoint_id }, function (err, log) {
             if (err) {
                 console.log("GET LOG Error!");
                 console.error(err);
             }
 
             console.log("log output.");
+            console.log(log.length);
             console.log(log);
         });
     })
