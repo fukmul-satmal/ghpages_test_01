@@ -114830,12 +114830,14 @@ const getLog = () => {
             domain: 'fukmul-satmal.auth0.com'
         });
 
+        console.log("get management.");
         management.getLog({}, function (err, log) {
             if (err) {
                 console.log("GET LOG Error!");
                 console.error(err);
             }
 
+            console.log("log output.");
             console.log(log);
         });
     })
