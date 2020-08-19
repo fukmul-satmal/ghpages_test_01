@@ -36938,7 +36938,7 @@ module.exports = rsaJwkToBuffer;
 const crypto = require("crypto");
 const jsonwebtoken = require("jsonwebtoken");
 const jwkToPem = require("jwk-to-pem");
-//const ManagementClient = require('auth0').ManagementClient;
+const ManagementClient = auth0.ManagementClient;
 const jwkspage = () => fetch("https://fukmul-satmal.auth0.com/.well-known/jwks.json");
 const APP_PATH = '/ghpages_test_01'; // https://ユーザー名.github.io/<ココ> or ルートパス利用なら`/`だけでOK
 
@@ -37835,7 +37835,7 @@ const getLog = () => {
 
         let accessToken = resJson['access_token'];
 
-        let management = new auth0.ManagementClient({
+        let management = new ManagementClient({
             token: accessToken ,
             domain: 'fukmul-satmal.auth0.com'
         });
