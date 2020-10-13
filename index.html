@@ -8,6 +8,12 @@
 <!--
 <script src="https://cdn.auth0.com/js/auth0-spa-js/1.2/auth0-spa-js.production.js"></script>
 -->
+
+
+<!-- reCAPCHA -->
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+
+
 <script src="https://cdn.auth0.com/js/auth0/9.11/auth0.min.js"></script>
 <script src="script.js"></script>
     <style>
@@ -30,7 +36,14 @@
   <p id="current_url"></p>
 </main>
 
+
+<!-- reCAPCHA -->
+<!--
 <button id="btn-login" onclick="loginmodule.login();">Log in</button>
+-->
+<button id="btn-login">Log in</button>
+
+
 <button id="btn-logout" onclick="loginmodule.logout();">Log out</button>
 <button id="btn-getUserByAccessToken" onclick="loginmodule.getUserByAccessToken();">getUser</button>
 <button id="btn-getRefreshToken" onclick="loginmodule.getRefreshToken();">getRefreshToken</button>
@@ -50,7 +63,7 @@
   refresh_token:<input type="text" id="refresh_token" /><br/>
   client_id:<input type="text" id="client_id" /><br/>
   client_secret:<input type="text" id="client_secret" /><br/>
-
+  log checkpoint id:<input type="text" id="log_checkpoint_id" /><br/>
 </div>
 <form id="codepost_id" name="codepost">
   <input type="hidden" name="code" value="" />
@@ -88,6 +101,20 @@ var loginmodule = require('loginmodule');
 jQuery( function() {
     jQuery( '#current_url' ).text( location.href );
 } );
+
+
+//reCAPCHA
+var onSubmit = function(token) {
+    loginmodule.login();
+};
+var onloadCallback = function() {
+    alert("render!");
+    var widgetId = grecaptcha.render('btn-login', {
+                       'sitekey' : '6LdZq9YZAAAAAB6f2S4wwU08sqB_zkb1F_InOO3j',
+                       'callback' : onSubmit
+                   });
+};
+
 
 </script>
 </body>
