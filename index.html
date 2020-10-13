@@ -10,9 +10,9 @@
 -->
 
 
-<!-- reCAPCHA 
+<!-- reCAPCHA -->
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
--->
+
 
 <script src="https://cdn.auth0.com/js/auth0/9.11/auth0.min.js"></script>
 <script src="script.js"></script>
@@ -39,9 +39,9 @@
 
 <!-- reCAPCHA -->
 <!--
-<button id="btn-login">Log in</button>
--->
 <button id="btn-login" onclick="loginmodule.login();">Log in</button>
+-->
+<button id="btn-login">Log in</button>
 
 
 <button id="btn-logout" onclick="loginmodule.logout();">Log out</button>
@@ -104,16 +104,16 @@ jQuery( function() {
 
 
 //reCAPCHA
-//var onSubmit = function(token) {
-//    loginmodule.login();
-//};
-//var onloadCallback = function() {
-//    alert("render!");
-//    var widgetId = grecaptcha.render('btn-login', {
-//                       'sitekey' : 'sitekey',
-//                       'callback' : onSubmit
-//                   });
-//};
+var onSubmit = function(token) {
+    loginmodule.login();
+};
+var onloadCallback = function() {
+    alert("render!");
+    var widgetId = grecaptcha.render('btn-login', {
+                       'sitekey' : 'sitekey',
+                       'callback' : onSubmit
+                   });
+};
 
 
 </script>
