@@ -114121,7 +114121,8 @@ const login = async (siteverify) => {
 
 alert("siteverify is \r\n" + siteverify);
   let recaptcha_token = "";
-  if (!siteverify) {
+  if (siteverify != "") {
+alert("set recaptcha_token!");
       recaptcha_token = siteverify;
   }
 
