@@ -114119,9 +114119,9 @@ const login = async (siteverify) => {
   let grant_type = document.getElementById("grant_type").value;
   let inputClientId = document.getElementById("client_id").value;
 
+alert("siteverify is \r\n" + siteverify);
   let recaptcha_token = "";
   if (!siteverify) {
-alert("siteverify is \r\n" + siteverify);
       recaptcha_token = siteverify;
   }
 
