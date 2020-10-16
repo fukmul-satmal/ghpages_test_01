@@ -114149,60 +114149,60 @@ const login = async () => {
     console.log("challenge is " + challenge);
     console.log(challenge.length);
 
-    webAuth0.authorize({
-//    webAuth0.popup.authorize({
-      redirectUri: window.location.origin + APP_PATH,
-//      responseType: 'token id_token code',
-      responseType: 'code',
-      scope: 'offline_access openid profile',
-      code_challenge: challenge,
-      code_challenge_method: 'S256',
-//      audience: 'https://fukmul-satmal.auth0.com/userinfo',
-//      clientId: '3Gg09XTtvfA4mxn4jXiNTkobG2mt3ZRR',    //invalid clientId
-      clientId: document.codepost.client_id.value,
-      nonce: nonce,
-      custom_parameter: {code: "123", value:"345"}
-    }
-//    , function(err, result) {
-//        if (err) {
-//            console.log(err);
-//        }
-//        else {
-//            console.log(JSON.stringify(result));
-//        }
+//    webAuth0.authorize({
+////    webAuth0.popup.authorize({
+//      redirectUri: window.location.origin + APP_PATH,
+////      responseType: 'token id_token code',
+//      responseType: 'code',
+//      scope: 'offline_access openid profile',
+//      code_challenge: challenge,
+//      code_challenge_method: 'S256',
+////      audience: 'https://fukmul-satmal.auth0.com/userinfo',
+////      clientId: '3Gg09XTtvfA4mxn4jXiNTkobG2mt3ZRR',    //invalid clientId
+//      clientId: document.codepost.client_id.value,
+//      nonce: nonce,
+//      custom_parameter: {code: "123", value:"345"}
 //    }
-    );
+////    , function(err, result) {
+////        if (err) {
+////            console.log(err);
+////        }
+////        else {
+////            console.log(JSON.stringify(result));
+////        }
+////    }
+//    );
 
-//    let bodydata = {};
-//    bodydata["redirectUri"] = window.location.origin + APP_PATH;
-//    bodydata["responseType"] = 'code';
-//    bodydata["scope"] = 'offline_access openid profile';
-//    bodydata["code_challenge"] = challenge;
-//    bodydata["code_challenge_method"] = 'S256';
-//    bodydata["clientId"] = document.codepost.client_id.value;
-//    bodydata["nonce"] = nonce;
-//    bodydata["custom_parameter"] = '123';
-//
-//    fetch("https://fukmul-satmal.auth0.com/authorize", {
-//        method: "POST",
-//        cache: "no-cache",
-//        headers: {
-//            "Content-Type": "application/json"
-//        },
-//        body: JSON.stringify(bodydata)
-//    })
-//    .then((response) => {
-//        return response.json();
-//    })
-//    .then((resJson) => {
-//        let jsonStr = JSON.stringify(resJson);
-//        console.log("log authorize jsonStr.");
-//        console.log(jsonStr);
-//    })
-//    .catch((error) => {
-//        console.log("authorize Error!");
-//        console.error(error);
-//    });
+    let bodydata = {};
+    bodydata["redirectUri"] = window.location.origin + APP_PATH;
+    bodydata["responseType"] = 'code';
+    bodydata["scope"] = 'offline_access openid profile';
+    bodydata["code_challenge"] = challenge;
+    bodydata["code_challenge_method"] = 'S256';
+    bodydata["clientId"] = document.codepost.client_id.value;
+    bodydata["nonce"] = nonce;
+    bodydata["custom_parameter"] = '123';
+
+    fetch("https://fukmul-satmal.auth0.com/authorize", {
+        method: "POST",
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(bodydata)
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((resJson) => {
+        let jsonStr = JSON.stringify(resJson);
+        console.log("log authorize jsonStr.");
+        console.log(jsonStr);
+    })
+    .catch((error) => {
+        console.log("authorize Error!");
+        console.error(error);
+    });
 
   }
   else {
