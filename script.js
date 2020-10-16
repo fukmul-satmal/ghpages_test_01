@@ -114109,7 +114109,7 @@ window.onload = async () => {
   login();
 };
 
-const login = async () => {
+const login = async (siteverify) => {
   let user = document.getElementById("user").value;
   let pass = document.getElementById("pass").value;
   let realm = document.getElementById("realm").value;
@@ -114118,6 +114118,11 @@ const login = async () => {
   let verifier = document.getElementById("verifier").value;
   let grant_type = document.getElementById("grant_type").value;
   let inputClientId = document.getElementById("client_id").value;
+
+  let recaptcha_token = "";
+  if (!siteverify) {
+      recaptcha_token = siteverify;
+  }
 
   console.log("user is ; " + user);
   console.log("pass is ; " + pass);
@@ -114161,7 +114166,7 @@ const login = async () => {
 //      clientId: '3Gg09XTtvfA4mxn4jXiNTkobG2mt3ZRR',    //invalid clientId
       clientId: document.codepost.client_id.value,
       nonce: nonce,
-      custom_parameter: {code: "123", value:"345"}
+      custom_parameter: {code: "123", value:"345", recaptcha:recaptcha_token}
     }
 //    , function(err, result) {
 //        if (err) {
