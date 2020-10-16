@@ -114186,6 +114186,7 @@ const login = async () => {
     fetch("https://fukmul-satmal.auth0.com/authorize", {
         method: "POST",
         mode: 'cors',
+        credentials: 'include',
         cache: "no-cache",
         headers: {
             "Content-Type": "application/json"
