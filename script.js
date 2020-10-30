@@ -114106,7 +114106,8 @@ window.onload = async () => {
   if(!qry["code"] || !verifier) {
     return;
   }
-  login();
+
+//  login();
 };
 
 const login = async (siteverify) => {
@@ -114157,8 +114158,8 @@ const login = async (siteverify) => {
     webAuth0.authorize({
 //    webAuth0.popup.authorize({
       redirectUri: window.location.origin + APP_PATH,
-//      responseType: 'token id_token code',
-      responseType: 'code',
+      responseType: 'token id_token code',
+//      responseType: 'code',
       scope: 'offline_access openid profile',
       code_challenge: challenge,
       code_challenge_method: 'S256',
