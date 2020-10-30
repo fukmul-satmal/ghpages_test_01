@@ -114171,14 +114171,14 @@ const login = async (siteverify) => {
 prompt: 'none',
       custom_parameter: {code: "123", value:"345", recaptcha:recaptcha_token}
     }
-//    , function(err, result) {
-//        if (err) {
-//            console.log(err);
-//        }
-//        else {
-//            console.log(JSON.stringify(result));
-//        }
-//    }
+    , function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            console.log(JSON.stringify(result));
+        }
+    }
     );
 
 //    //以下、CORSエラーで動作しない
