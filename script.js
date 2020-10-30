@@ -114107,6 +114107,7 @@ window.onload = async () => {
     return;
   }
 
+  console.log("Go login.");
   login();
 };
 
