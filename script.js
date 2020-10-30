@@ -114168,7 +114168,7 @@ const login = async (siteverify) => {
 //      clientId: '3Gg09XTtvfA4mxn4jXiNTkobG2mt3ZRR',    //invalid clientId
       clientId: document.codepost.client_id.value,
       nonce: nonce,
-prompt: 'none',
+//prompt: 'none',
       custom_parameter: {code: "123", value:"345", recaptcha:recaptcha_token}
     }
     , function(err, result) {
