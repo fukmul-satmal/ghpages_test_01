@@ -114358,7 +114358,7 @@ const  handleAuthentication = () => {
         webAuth0.client.userInfo(authResult.accessToken, (err, user) => {
           if (err) {
             console.log(err);
-            alert(`Error: ${err.error}. Check the console for further details.`);
+            alert(`userInfo Error: ${err.error}. Check the console for further details.`);
           }
           else if (user) {
             console.log("userinfo get.");
@@ -114371,7 +114371,7 @@ const  handleAuthentication = () => {
       else {
         if (err) {
           console.log(err);
-          alert(`Error: ${err.error}. Check the console for further details.`);
+          alert(`parseHash Error: ${err.error}. Check the console for further details.`);
         }
         else {
           console.log(JSON.stringify(
