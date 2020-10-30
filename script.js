@@ -114107,7 +114107,7 @@ window.onload = async () => {
     return;
   }
 
-//  login();
+  login();
 };
 
 const login = async (siteverify) => {
