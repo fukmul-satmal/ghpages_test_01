@@ -114319,7 +114319,7 @@ const logout = () => {
 
   webAuth0.logout({
     returnTo: window.location.origin + APP_PATH,
-    federated: 'true'
+    federated: true
   });
 };
 
