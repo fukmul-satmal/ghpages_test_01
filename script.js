@@ -114318,7 +114318,8 @@ const logout = () => {
     window.history.replaceState({}, document.title, APP_PATH);
 
   webAuth0.logout({
-    returnTo: window.location.origin + APP_PATH
+    returnTo: window.location.origin + APP_PATH,
+    federated: 'true'
   });
 };
 
